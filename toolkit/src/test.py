@@ -14,7 +14,7 @@ def save_workbook(wb, name):
     wb.save(f"{PATH_TO_SHEETS}/{name}")
 
 def print_cell_value(ws, cell):
-    print(ws[f'{cell}'].value)
+    print(ws[f'{cell}'].value) 
 
 def set_cell_value(ws, cell, val=""):
     ws[f'{cell}'].value = val
@@ -41,10 +41,13 @@ def add_sensor_entry():
 
 def main():
     # Get outselved a workbook
-    wb = Workbook()
+    wb = load_workbook("../test/test0.xlsx")
 
     # get the active worksheet
     selected_ws = wb.active
+    # must pick 1 and 5 as excel is 1 indexed rather than 0
+    for i in range(1, 5):
+        print_cell_value(selected_ws, f"{get_column_letter(i)}1")
 
 if __name__ == "__main__":
     main()
