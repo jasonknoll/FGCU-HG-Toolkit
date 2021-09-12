@@ -30,6 +30,15 @@ def create_new_sheet(wb, name):
     else:
         print(f"{name} already exists!")
 
+"""
+ Allow the user to automatically add  
+ a new entry to a spreadsheet that puts
+ everything on a new line, it does the calculations
+ correctly, and it'll edit other files if needed
+"""
+def add_sensor_entry():
+    pass
+
 def main():
     # Get outselved a workbook
     wb = Workbook()
