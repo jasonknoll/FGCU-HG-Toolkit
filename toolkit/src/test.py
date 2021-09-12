@@ -41,13 +41,19 @@ def add_sensor_entry():
 
 def main():
     # Get outselved a workbook
-    wb = load_workbook("../test/test0.xlsx")
+    try:
+        wb = load_workbook("../test/test0.xlsx")
+    except FileNotFoundError:
+        wb = Workbook()
+        print("File not found")
 
     # get the active worksheet
     selected_ws = wb.active
     # must pick 1 and 5 as excel is 1 indexed rather than 0
     for i in range(1, 5):
         print_cell_value(selected_ws, f"{get_column_letter(i)}1")
+
+    x = input("press any key...")
 
 if __name__ == "__main__":
     main()
