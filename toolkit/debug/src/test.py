@@ -64,7 +64,10 @@ def main():
     for i in range(1, 5):
         print_cell_value(selected_ws, f"{get_column_letter(i)}1")
 
-    x = input("press any key...")
+    pause_program()
+    
+def pause_program():
+    input("press any key...")
 
 if __name__ == "__main__":
     main()
