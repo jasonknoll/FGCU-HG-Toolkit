@@ -36,6 +36,7 @@ def create_new_sheet(wb, name):
  everything on a new line, it does the calculations
  correctly, and it'll edit other files if needed
 """
+
 def add_sensor_entry():
     pass
 
