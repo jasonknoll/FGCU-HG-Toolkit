@@ -42,7 +42,7 @@ def add_sensor_entry():
 def main():
     # Get outselved a workbook
     try:
-        wb = load_workbook("../test/test0.xlsx")
+        wb = load_workbook(f"{PATH_TO_SHEETS}/test0.xlsx")
     except FileNotFoundError:
         wb = Workbook()
         print("File not found")
