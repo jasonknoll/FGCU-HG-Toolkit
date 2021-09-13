@@ -98,7 +98,9 @@ class CLI:
             if i[0] in self.commands['exit']:
                 self.stop()
             else:
-                pass
+                print(f"Sorry, {i[0]} is not a recognized command!")
+        else:
+            pass
 
 
 if __name__ == "__main__":
