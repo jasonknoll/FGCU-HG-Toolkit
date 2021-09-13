@@ -5,7 +5,9 @@ Created on Mon Sep 13 10:57:47 2021
 @author: jason
 """
 
-import tkinter
+from tkinter import *
+from tkinter import ttk
+
 from openpyxl import Workbook, load_workbook 
 
 
@@ -24,6 +26,11 @@ def main():
     # Blank default workbook
     current_wb = Workbook()
     current_ws = current_wb.active
-
+    
+    # TODO open window
+    
+    # "Obligatory first program"
+    
+    
 if __name__ == '__main__':
     pass
