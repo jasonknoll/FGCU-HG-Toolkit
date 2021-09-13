@@ -42,7 +42,7 @@ def save_workbook(wb, name):
     wb.save(f"{DEFAULT_SHEET_DIR}/{name}.xlsx")
 
 # ?
-def edit_workbook():
+def edit_cell(cell, val):
     pass
 
 def main():
@@ -64,7 +64,9 @@ class CLI:
         self.ws = self.wb.active
         
         self.commands = {'exit': ["exit", "quit", "q"],
-                         'new_workbook': [""]}
+                         'new_workbook': ["new-wb"],
+                         'open_workbook': ["open"],
+                         'save_workbook': ["save"]}
         self.args = {}
         
         
@@ -99,7 +101,11 @@ class CLI:
             else:
                 print(f"Sorry, {i[0]} is not a recognized command!")
         else:
-            pass
+            if cmd_line[0] in self.commands['new_workbook']:
+                self.wb = create_new_workbook(cmd_line[1])
+            elif cmd_line[0] in self.commands['open_workbook']:
+                self.wb = load_workbook(f"{DEFAULT_SHEET_DIR}/{cmd_line[1]}")
+        
         """
          TODO check for commands and arguments
          with opening and closing sheets. I'll get 
