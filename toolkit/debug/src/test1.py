@@ -66,6 +66,10 @@ class CLI:
         self.wb = Workbook()
         self.ws = self.wb.active
         
+        self.commands = {'exit': ["exit", "quit", "q"],
+                         'new_workbook': [""]}
+        self.args = {}
+        
         
     # All CLI handling stuff    
     def start(self):
@@ -80,8 +84,21 @@ class CLI:
     def get_input(self):
         return input("> ")
     
+    """ 
+     Do all the input "parsing".
+     I wouldn't really call it parsing 
+     because the structure of a command is very strict
+     and hardcoded
+    """
     def check_input(self, i):
         cmd_list = i.split()
+        
+        # gotta check if their quitting or not
+        if (len(i) == 1):
+            if i[0] in self.commands['exit']:
+                self.stop()
+            else:
+                pass
 
 
 if __name__ == "__main__":
