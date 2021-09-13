@@ -101,7 +101,11 @@ class CLI:
                 print(f"Sorry, {i[0]} is not a recognized command!")
         else:
             pass
-
+        """
+         TODO check for commands and arguments
+         with opening and closing sheets. I'll get 
+         to editing with the GUI.
+        """
 
 if __name__ == "__main__":
     main()
