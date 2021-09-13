@@ -30,7 +30,10 @@ def main():
     # TODO open window
     
     # "Obligatory first program"
+    root = Tk()
+    ttk.Button(root, text="Hello WOrld").grid()
+    root.mainloop()
     
     
 if __name__ == '__main__':
-    pass
+    main()
