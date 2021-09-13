@@ -20,6 +20,7 @@ import numpy as np
 # Maybe set some global vars?? 
 # I need to know where the sheets are and stuff
 
+
 """
  Main function will be our main loop running everything
  including the gui
