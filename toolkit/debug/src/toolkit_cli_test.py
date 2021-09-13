@@ -24,11 +24,7 @@ DEFAULT_SHEET_DIR = "../test1/"
 
 def create_new_workbook(title=""):
     new_wb = Workbook()
-    
-    # TODO check if a title has been set
-    # if not, it'll get some default name
-    # that I'll set later
-    
+    # set the title if the arg is set
     if title != "":
         new_wb.title = title
     
@@ -76,10 +72,12 @@ class CLI:
         self.isRunning = True
         
     def stop(self):
+        print("exiting...")
         self.isRunning = False
     
     def run(self):
         i = self.get_input()
+        self.check_input(i)
     
     def get_input(self):
         return input("> ")
