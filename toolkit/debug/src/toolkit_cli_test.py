@@ -38,6 +38,9 @@ def create_new_workbook(title=""):
 def close_workbook():
     pass
 
+def save_workbook(wb, name):
+    wb.save(f"{DEFAULT_SHEET_DIR}/{name}.xlsx")
+
 # ?
 def edit_workbook():
     pass
@@ -47,8 +50,6 @@ def main():
     cli.start()
     while cli.isRunning:
         cli.run()
-    
-    
     
 
 
@@ -89,11 +90,11 @@ class CLI:
      and hardcoded
     """
     def check_input(self, i):
-        cmd_list = i.split()
+        cmd_line = i.split()
         
         # gotta check if their quitting or not
-        if (len(i) == 1):
-            if i[0] in self.commands['exit']:
+        if (len(cmd_line) == 1):
+            if cmd_line[0] in self.commands['exit']:
                 self.stop()
             else:
                 print(f"Sorry, {i[0]} is not a recognized command!")
@@ -103,6 +104,7 @@ class CLI:
          TODO check for commands and arguments
          with opening and closing sheets. I'll get 
          to editing with the GUI.
+         1. Open wb/create new one
         """
 
 if __name__ == "__main__":
