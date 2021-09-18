@@ -27,11 +27,16 @@ def main():
     current_wb = Workbook()
     current_ws = current_wb.active
     
-    # TODO open window
+    # TODO open window (non-adjustable to start)
+    
     
     # "Obligatory first program"
     root = Tk()
+    
+    # button setup? 
+    buttons = []
     ttk.Button(root, text="Hello WOrld").grid()
+    
     root.mainloop()
     
     
