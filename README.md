@@ -12,3 +12,6 @@ I'm building this software using the <i>Anaconda</i> development envrionment. It
 
 <b>Bug Report</b><br>
 Soon enough you guys will actually be using this software. Sometimes bugs slip through the cracks and manage to end up in the release version. When you guys encounter bugs, email me at: jmknoll4456@eagle.fgcu.edu to report the bugs! 
+
+<b>How to Use</b><br>
+You don't (yet)
