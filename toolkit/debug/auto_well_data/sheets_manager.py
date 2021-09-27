@@ -6,5 +6,18 @@
 """
 
 class SheetsManager:
-    def __init__(self):
+    def __init__(self, s1, s2):
+        self.sheet1 = s1
+        self.sheet2 = s2
+        self.new_sheet = None
+        
+    """
+     Combine old and new sheets and do calculations
+     for depth and pressure
+    """
+    def combine_sheets(self):
+        pass
+    
+    # After everything is done, we gotta reupload it to drive
+    def upload_to_google():
         pass
