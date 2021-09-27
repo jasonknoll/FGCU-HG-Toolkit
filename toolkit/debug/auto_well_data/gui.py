@@ -7,6 +7,8 @@ from tkinter import *, ttk
 
 import html_reader as hr
 
+import sheets_manager as sm
+
 # TODO Setup window size
 # Add buttons and shit
 # Figure out how to select files from HD
@@ -23,6 +25,7 @@ class GUI(tk.Frame):
         super().__init__(master)
 
 # Combine old data with the newly generated sheet
+# This should be handled by the sheets manager!!!
 def combine_sheets(sheet1, sheet2):
     pass
 
