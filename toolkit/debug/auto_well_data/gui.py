@@ -40,6 +40,12 @@ def main():
     gui = GUI()
     gui.master.title(TITLE)
     gui.master.maxsize(WINDOW_WIDTH, WINDOW_HEIGHT)
+    
+    # I think this is how you do it!
+    test = tk.Button()
+    
+    # TODO test button configurations
+    print(test.config())
 
 if __name__ == "__main__":
     main()
