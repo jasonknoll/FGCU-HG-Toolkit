@@ -5,6 +5,8 @@
 import tkinter as tk
 from tkinter import *, ttk
 
+import html_reader as hr
+
 # TODO Setup window size
 # Add buttons and shit
 # Figure out how to select files from HD
