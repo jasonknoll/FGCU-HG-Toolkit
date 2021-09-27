@@ -10,24 +10,24 @@ from tkinter import *, ttk
 # Figure out how to select files from HD
 # connect to Google Sheet API
 
-WINDOW_WIDTH = 0
-WINDOW_HEIGHT = 0
+WINDOW_WIDTH = 640
+WINDOW_HEIGHT = 480
 WINDOW_TITLE = "Hydrogeology Well Data Processor v0.1"
 
 # I have to setup a canvas or something
 
 # Combine old data with the newly generated sheet
 def combine_sheets(sheet1, sheet2):
- pass
+    pass
 
 def select_file():
- pass
+    pass
 
 def draw_window():
- pass
+    pass
 
 def main():
- pass
+    pass
 
 if __name__ == "__main__":
- main()
+    main()
