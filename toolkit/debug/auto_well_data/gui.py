@@ -3,7 +3,7 @@
  with the user
 """
 import tkinter as tk
-from tkinter import *, ttk
+from tkinter import *
 
 import html_reader as hr
 
