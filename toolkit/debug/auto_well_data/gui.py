@@ -1,6 +1,7 @@
 """
  Handle the GUI and interactions
- with the user
+ with the user.
+ Will be the maine executable
 """
 import tkinter as tk
 from tkinter import *
@@ -14,38 +15,27 @@ import sheets_manager as sm
 # Figure out how to select files from HD
 # connect to Google Sheet API
 
+# Setup our window
+root = Tk()
+
+html_reader = hr.HtmlReader
+sheets_manager = sm.SheetsManager
+
 WINDOW_WIDTH = 640
 WINDOW_HEIGHT = 480
 TITLE = "Hydrogeology Well Data Processor v0.1"
 
-# I have to setup a canvas or something
+# TODO setup connection to google sheets
+connected_to_sheets = False 
 
-class GUI(tk.Frame):
-    def __init__(self, master=None):
-        super().__init__(master)
-
-# Combine old data with the newly generated sheet
-# This should be handled by the sheets manager!!!
-def combine_sheets(sheet1, sheet2):
-    pass
-
-def select_file():
-    pass
-
-def draw_window():
-    pass
+# Setup the buttons
+# TODO need to setup locations for everything
+select_html_file_button = Button(root, text="b1", command=None)
+select_manual_well_data_button = Button(root, text="b2")
+generate_sheet_button = Button(root, text="b2")
 
 def main():
-    # initialize window
-    gui = GUI()
-    gui.master.title(TITLE)
-    gui.master.maxsize(WINDOW_WIDTH, WINDOW_HEIGHT)
-    
-    # I think this is how you do it!
-    test = tk.Button()
-    
-    # TODO test button configurations
-    print(test.config())
+    pass
 
 if __name__ == "__main__":
     main()
