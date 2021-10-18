@@ -3,6 +3,7 @@
  with the user.
  Will be the maine executable
 """
+
 import tkinter as tk
 from tkinter import *
 
@@ -46,6 +47,7 @@ if (html_reader.get_curr_file_path() != None):
 
 select_manual_well_data_button = Button(root, text="Upload Manual Well Measurement", padx=20, pady=20)
 select_manual_well_data_button.grid(row=0, column=1)
+
 
 generate_sheet_button = Button(root, text="Generate New Sheet", padx=20, pady=20)
 generate_sheet_button.grid(row=0, column=2)

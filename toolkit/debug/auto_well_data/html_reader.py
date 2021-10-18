@@ -18,3 +18,6 @@ class HtmlReader:
     
     def get_curr_file_path(self):
         return self.curr_file_path
+    
+    def parse_curr_file(self):
+        pass
