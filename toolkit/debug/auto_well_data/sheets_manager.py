@@ -6,7 +6,7 @@
 """
 
 class SheetsManager:
-    def __init__(self, s1, s2):
+    def __init__(self, s1=None, s2=None):
         self.sheet1 = s1
         self.sheet2 = s2
         self.new_sheet = None

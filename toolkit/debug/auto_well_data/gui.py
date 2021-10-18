@@ -35,6 +35,15 @@ connected_to_sheets = False
 select_html_file_button = Button(root, text="Upload HTML File", command=None, padx=20, pady=20)
 select_html_file_button.grid(row=0, column=0)
 
+
+html_file_path_label = Label(root, text=f'Selected HTML file: none')
+html_file_path_label.grid(row=1, column=0)
+
+if (html_reader.get_curr_file_path() != None):
+    html_file_path_label = Label(root, text=f'Selected HTML file: {html_reader.get_curr_file_path()}')
+    html_file_path_label.grid(row=1, column=0)
+
+
 select_manual_well_data_button = Button(root, text="Upload Manual Well Measurement", padx=20, pady=20)
 select_manual_well_data_button.grid(row=0, column=1)
 

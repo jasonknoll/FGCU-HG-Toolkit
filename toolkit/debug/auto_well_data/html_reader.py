@@ -13,5 +13,8 @@ class HtmlReader:
     def __init__(self):
         self.curr_file_path = None
 
-    def set_curr_file(self, path):
+    def set_curr_file_path(self, path):
         self.curr_file_path = path
+    
+    def get_curr_file_path(self):
+        return self.curr_file_path
