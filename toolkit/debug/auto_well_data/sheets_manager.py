@@ -5,6 +5,9 @@
  depths. Afterward a new sheet will be generated
 """
 
+import openpyxl 
+from openpyxl import Workbook
+
 class SheetsManager:
     def __init__(self, s1=None, s2=None):
         self.sheet1 = s1

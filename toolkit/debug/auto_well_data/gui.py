@@ -17,6 +17,7 @@ import sheets_manager as sm
 # Add buttons and shit
 # Figure out how to select files from HD
 # connect to Google Sheet API
+# Setup OpenpyXL
 
 # Setup our window
 root = Tk()
@@ -30,6 +31,7 @@ TITLE = "Hydrogeology Well Data Processor v0.1"
 
 # TODO setup connection to google sheets
 connected_to_sheets = False 
+
 
 # Setup the buttons
 # TODO need to setup locations for everything
@@ -45,12 +47,13 @@ if (html_reader.get_curr_file_path() != None):
     html_file_path_label.grid(row=1, column=0)
 
 
-select_manual_well_data_button = Button(root, text="Upload Manual Well Measurement", padx=20, pady=20)
+select_manual_well_data_button = Button(root, text="Upload Manual Well Measurement Sheet", padx=20, pady=20)
 select_manual_well_data_button.grid(row=0, column=1)
 
 
 generate_sheet_button = Button(root, text="Generate New Sheet", padx=20, pady=20)
 generate_sheet_button.grid(row=0, column=2)
+
 
 # Handle all things necessary to connect to google account
 def connect_to_sheets():
