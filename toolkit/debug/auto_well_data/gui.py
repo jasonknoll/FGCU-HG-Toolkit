@@ -26,7 +26,9 @@ import sheets_manager as sm
 # Setup our window
 # TODO organize buttons and labels into frames
 root = Tk()
-root.geometry("640x300")
+root.geometry("640x480")
+
+button_frame = LabelFrame(root, text="Auto Well Data Processor", width=480, height=80, bd=5)
 
 
 html_reader = hr.HtmlReader()
@@ -53,15 +55,15 @@ def update_html_file_path(label, hr):
         label.grid(row=1, column=0)
     
     
-select_html_file_button = Button(root, text="Upload HTML File", command= lambda: update_html_file_path(html_file_path_label, html_reader), padx=20, pady=20)
+select_html_file_button = Button(button_frame, text="Upload HTML File", command= lambda: update_html_file_path(html_file_path_label, html_reader), padx=20, pady=20)
 select_html_file_button.grid(row=0, column=0)
 
 
-select_manual_well_data_button = Button(root, text="Upload Manual Well Measurement Sheet", padx=20, pady=20)
+select_manual_well_data_button = Button(button_frame, text="Upload Manual Well Measurement Sheet", padx=20, pady=20)
 select_manual_well_data_button.grid(row=0, column=1)
 
 
-generate_sheet_button = Button(root, text="Generate New Sheet", padx=20, pady=20)
+generate_sheet_button = Button(button_frame, text="Generate New Sheet", padx=20, pady=20)
 generate_sheet_button.grid(row=0, column=2)
 
 
