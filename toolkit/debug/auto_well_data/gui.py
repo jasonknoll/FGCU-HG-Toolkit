@@ -77,7 +77,7 @@ def connect_to_sheets():
     pass
 
 def main():
-    #root.resizable(False, False)
+    root.resizable(False, False)
     #root.grid_propagate(False)
     root.mainloop()
 
