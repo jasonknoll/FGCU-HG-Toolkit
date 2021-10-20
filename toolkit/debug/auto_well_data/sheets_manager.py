@@ -10,6 +10,7 @@ from openpyxl import Workbook
 
 class SheetsManager:
     def __init__(self, s1=None, s2=None):
+        # old and new sheets needing to be compiled together
         self.sheet1 = s1
         self.sheet2 = s2
         self.new_sheet = None
