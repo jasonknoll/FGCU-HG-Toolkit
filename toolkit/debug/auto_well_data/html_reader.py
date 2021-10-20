@@ -13,6 +13,7 @@ class HtmlReader:
     def __init__(self):
         self.curr_file_path = None
 
+    # Getters and setters
     def set_curr_file_path(self, path):
         self.curr_file_path = path
     

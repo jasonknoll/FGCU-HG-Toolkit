@@ -24,3 +24,4 @@ class SheetsManager:
     # After everything is done, we gotta reupload it to drive
     def upload_to_google():
         pass
+        
