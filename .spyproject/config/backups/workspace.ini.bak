@@ -4,7 +4,7 @@ save_data_on_exit = True
 save_history = True
 save_non_project_files = False
 project_type = empty-project-type
-recent_files = ['toolkit\\debug\\auto_well_data\\gui0.py', 'toolkit\\debug\\auto_well_data\\sheets0.py', 'toolkit\\debug\\auto_well_data\\gui.py', 'toolkit\\debug\\auto_well_data\\html_reader.py', 'toolkit\\debug\\auto_well_data\\sheets_manager.py', 'toolkit\\debug\\auto_well_data\\html_data\\VuSitu_2021-09-09_09-35-28_Default Site_Log_7ALog_2021-09-09\\VuSitu_2021-09-09_09-35-28_Default Site_Log_7ALog_2021-09-09.htm', 'toolkit\\debug\\auto_well_data\\html_data\\VuSitu_2021-09-09_09-35-28_Default Site_Log_7ALog_2021-09-09\\VuSitu_2021-09-09_09-35-28_Default Site_Log_7ALog_2021-09-09.csv']
+recent_files = ['toolkit\\debug\\auto_well_data\\gui0.py', 'toolkit\\debug\\auto_well_data\\sheets0.py', 'toolkit\\debug\\auto_well_data\\gui.py', 'toolkit\\debug\\auto_well_data\\html_reader.py', 'toolkit\\debug\\auto_well_data\\sheets_manager.py']
 
 [main]
 version = 0.2.0

@@ -11,10 +11,15 @@ from openpyxl import Workbook
 class SheetsManager:
     def __init__(self, s1=None, s2=None):
         # old and new sheets needing to be compiled together
-        self.sheet1 = s1
+        self.manual_data = s1
         self.sheet2 = s2
         self.new_sheet = None
         
+    def set_manual_sheet(self, sheet):
+        self.manual_data = sheet
+        
+    def get_manual_sheet(self, sheet):
+        return self.manual_data
     """
      Combine old and new sheets and do calculations
      for depth and pressure

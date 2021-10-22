@@ -22,11 +22,14 @@ import sheets_manager as sm
 # Figure out how to select files from HD
 # connect to Google Sheet API
 # Setup OpenpyXL
+# TODO Look at email from Lane
 
 # Setup our window
 # TODO organize buttons and labels into frames
 root = Tk()
 root.geometry("640x480")
+root.title("HG-Well-Data-Toolkit v0.1")
+root.iconbitmap('logoicon.ico')
 
 button_frame = LabelFrame(root, text="Auto Well Data Processor", width=480, height=140, bd=5)
 button_frame.pack()
@@ -50,15 +53,30 @@ connected_to_sheets = False
 html_file_path_label = Label(label_frame, text=f'Selected HTML file: none', justify="center", wraplength=550)
 html_file_path_label.pack()
 
+# TODO Pickup from here 10/22/2021
+manual_data_path_label = Label(label_frame, text='Selected well-data file: none', justify="center", wraplength=550, pady=10)
+manual_data_path_label.pack()
+
 # Setup the buttons
 # TODO need to setup locations for everything
 
+def get_file_type(path):
+    rev = path[::-1]
+    f_type = ""
+    for r in rev:
+        if (not r == '.'):
+            f_type += r
+        else:
+            break
+    return f_type[::-1]
+
+# TODO figure out file path labels
 def update_html_file_path(label, hr):
-    hr.set_curr_file_path(tkinter.filedialog.askopenfilename())
+    hr.set_curr_file_path(tkinter.filedialog.askopenfilename())    
     if (hr.get_curr_file_path()):
-        label.config(text = f'Seelcted HTML file: {hr.get_curr_file_path()}')
+        label.config(text = f'Selected {get_file_type(hr.get_curr_file_path())} file: {hr.get_curr_file_path()}')
         label.pack()
-    
+        
     
 select_html_file_button = Button(button_frame, text="Upload HTML File", command= lambda: update_html_file_path(html_file_path_label, html_reader), pady=7)
 select_html_file_button.pack()
@@ -71,10 +89,6 @@ select_manual_well_data_button.pack()
 generate_sheet_button = Button(button_frame, text="Generate New Sheet", pady=5)
 generate_sheet_button.pack()
 
-
-# Handle all things necessary to connect to google account
-def connect_to_sheets():
-    pass
 
 def main():
     root.resizable(False, False)

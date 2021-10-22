@@ -5,11 +5,9 @@
  job done. 
 """
 
-# find some html reader class
-# This will read the well HTMl file and spit it into a sheets/excel file
-# Probably sheets
-
-
+# TODO
+# Learn how to read the HTML here (or maybe grab the csv somehow)
+# Get all the data, but don't export yet until I contact Rotz
 
 class HtmlReader:
     def __init__(self):
