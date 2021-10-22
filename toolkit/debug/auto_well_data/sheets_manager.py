@@ -9,9 +9,11 @@ from openpyxl import Workbook, load_workbook
 
 # Create objects for every well to organize the data a little better
 class Well:
-    def __init__(self):
-        self.name = ''
+    def __init__(self, name=''):
+        self.name = name
         self.isAutomatic = False
+        if (self.name[-1].upper() == 'A'):
+            self.isAutomatic = True
 
 class SheetsManager:
     def __init__(self, s1=None, s2=None):
@@ -19,6 +21,8 @@ class SheetsManager:
         self.manual_data = s1
         self.existing_well_data = s2
         self.new_sheet = None
+        
+        self.curr_wb = None
         
         self.scraped_manual_data = []
         self.wells = []
@@ -29,12 +33,25 @@ class SheetsManager:
     def get_manual_data_path(self):
         return self.manual_data
     
+    def check_if_well_exists(self, well_name) -> bool:
+        for w in self.wells:
+            if (w.name != well_name):
+                    continue
+            else:
+                return True
+        return False
+            
+    
     # TODO read all data from the manual entries
     def scrape_manual_sheet(self):
         # First it'll scrape all the sheets to get the wells and create our well objects
-        curr_wb = load_workbook(self.get_manual_data_path())
-        for s in curr_wb.sheetnames():
-            print(s)
+        self.curr_wb = load_workbook(self.get_manual_data_path())
+        for s in self.curr_wb.sheetnames:
+            #print(s)
+            if (not self.check_if_well_exists(s)):
+                self.wells.append(Well(s))
+        print(self.wells[0].name)
+            
         
     """
      Combine old and new sheets and do calculations

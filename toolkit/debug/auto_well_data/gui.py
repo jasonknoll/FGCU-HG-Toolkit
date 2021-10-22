@@ -96,6 +96,9 @@ select_manual_well_data_button.pack()
 generate_sheet_button = Button(button_frame, text="Generate New Sheet", pady=5)
 generate_sheet_button.pack()
 
+test_sheets_button = Button(label_frame, text="Test reading sheets", command=sheets_manager.scrape_manual_sheet,pady=5)
+test_sheets_button.pack()
+
 
 def main():
     root.resizable(False, False)
