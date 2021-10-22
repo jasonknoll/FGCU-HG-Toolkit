@@ -28,6 +28,9 @@ class SheetsManager:
         
         self.wells = []
         
+        # pandas splits all the dataframes into sheets for us? https://www.sitepoint.com/using-python-parse-spreadsheet-data/
+        self.sheets = []
+        
     def set_manual_data_path(self, sheet):
         self.manual_data = sheet
         
@@ -56,7 +59,7 @@ class SheetsManager:
         print(self.curr_wb[self.wells[0].name]['A1'].value)
             
         # TODO search through all the rows and columns and put it all into a 2d list?
-        # Create pandas dataframe and work with it
+        # Create pandas dataframe and work with it?
         
     """
      Combine old and new sheets and do calculations
