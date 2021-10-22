@@ -5,6 +5,7 @@
  depths. Afterward a new sheet will be generated
 """
 
+import pandas as pd
 from openpyxl import Workbook, load_workbook
 
 # Create objects for every well to organize the data a little better
@@ -14,6 +15,7 @@ class Well:
         self.isAutomatic = False
         if (self.name[-1].upper() == 'A'):
             self.isAutomatic = True
+            
 
 class SheetsManager:
     def __init__(self, s1=None, s2=None):
@@ -46,12 +48,16 @@ class SheetsManager:
     def scrape_manual_sheet(self):
         # First it'll scrape all the sheets to get the wells and create our well objects
         self.curr_wb = load_workbook(self.get_manual_data_path())
+        
+        # Create our well objects from file without creating duplicates
         for s in self.curr_wb.sheetnames:
-            #print(s)
             if (not self.check_if_well_exists(s)):
                 self.wells.append(Well(s))
-        print(self.wells[0].name)
+                
+        print(self.curr_wb[self.wells[0].name]['A1'].value)
             
+        # TODO search through all the rows and columns and put it all into a 2d list?
+        # Create pandas dataframe and work with it
         
     """
      Combine old and new sheets and do calculations
