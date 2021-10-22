@@ -26,7 +26,6 @@ class SheetsManager:
         
         self.curr_wb = None
         
-        self.scraped_manual_data = []
         self.wells = []
         
     def set_manual_data_path(self, sheet):
