@@ -72,7 +72,7 @@ def get_file_type(path):
 
 # TODO figure out file path labels
 def update_html_file_path(label, hr):
-    hr.set_curr_file_path(tkinter.filedialog.askopenfilename())    
+    hr.set_curr_file_path(tkinter.filedialog.askopenfilename(filetypes=[("htm files", ".htm"),("html files", ".html")]))                       
     if (hr.get_curr_file_path()):
         label.config(text = f'Selected {get_file_type(hr.get_curr_file_path())} file: {hr.get_curr_file_path()}')
         label.pack()
@@ -81,8 +81,9 @@ def update_html_file_path(label, hr):
 select_html_file_button = Button(button_frame, text="Upload HTML File", command= lambda: update_html_file_path(html_file_path_label, html_reader), pady=7)
 select_html_file_button.pack()
 
+
 def update_manual_data_path(label, sm):
-    sm.set_manual_data_path(tkinter.filedialog.askopenfilename())
+    sm.set_manual_data_path(tkinter.filedialog.askopenfilename(filetypes=[("excel files", ".xlsx")]))
     if (sm.get_manual_data_path):
         label.config(text=f'Selected manual data sheet file: {sm.get_manual_data_path()}')
         label.pack()
