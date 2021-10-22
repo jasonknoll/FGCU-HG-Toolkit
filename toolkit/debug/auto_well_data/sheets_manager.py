@@ -5,13 +5,13 @@
  depths. Afterward a new sheet will be generated
 """
 
-import openpyxl 
-from openpyxl import Workbook
+from openpyxl import Workbook, load_workbook
 
 # Create objects for every well to organize the data a little better
 class Well:
     def __init__(self):
-        pass
+        self.name = ''
+        self.isAutomatic = False
 
 class SheetsManager:
     def __init__(self, s1=None, s2=None):
@@ -23,16 +23,19 @@ class SheetsManager:
         self.scraped_manual_data = []
         self.wells = []
         
-    def set_manual_sheet(self, sheet):
+    def set_manual_data_path(self, sheet):
         self.manual_data = sheet
         
-    def get_manual_sheet(self):
+    def get_manual_data_path(self):
         return self.manual_data
     
     # TODO read all data from the manual entries
     def scrape_manual_sheet(self):
         # First it'll scrape all the sheets to get the wells and create our well objects
-        pass
+        curr_wb = load_workbook(self.get_manual_data_path())
+        for s in curr_wb.sheetnames():
+            print(s)
+        
     """
      Combine old and new sheets and do calculations
      for depth and pressure

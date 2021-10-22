@@ -81,8 +81,14 @@ def update_html_file_path(label, hr):
 select_html_file_button = Button(button_frame, text="Upload HTML File", command= lambda: update_html_file_path(html_file_path_label, html_reader), pady=7)
 select_html_file_button.pack()
 
+def update_manual_data_path(label, sm):
+    sm.set_manual_data_path(tkinter.filedialog.askopenfilename())
+    if (sm.get_manual_data_path):
+        label.config(text=f'Selected manual data sheet file: {sm.get_manual_data_path()}')
+        label.pack()
 
-select_manual_well_data_button = Button(button_frame, text="Upload Manual Well Measurement Sheet", pady=7)
+
+select_manual_well_data_button = Button(button_frame, text="Upload Manual Well Measurement Sheet",command=lambda: update_manual_data_path(manual_data_path_label, sheets_manager), pady=7)
 select_manual_well_data_button.pack()
 
 
