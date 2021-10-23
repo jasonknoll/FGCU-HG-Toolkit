@@ -8,11 +8,13 @@
 import pandas as pd
 from openpyxl import Workbook, load_workbook
 
+"""
+ TODO Get Lane's advice so that I can compile all the data
+ correctly. I have the data stripped, but now I have to manipulate it.
+"""
 
 class SheetsManager:
     def __init__(self, s1=None, s2=None):
-        # old and new sheets needing to be compiled together
-        
         self.manual_data_path = s1
         # "Well measurements on campus"
         self.existing_data_path = s2
@@ -39,8 +41,7 @@ class SheetsManager:
         # First it'll scrape all the sheets to get the wells and create our well objects
         self.manual_wb = pd.ExcelFile(self.get_manual_data_path())
         
-        # Create our well objects from file without creating duplicates
-        
+        # Store a df of every sheet in our list of sheets
         for s in self.manual_wb.sheet_names:
             self.manual_well_data.append(pd.read_excel(self.manual_wb, s))
             #self.wells.append(pd.read_excel(self.get_manual_data_path(), sheet_name=s))
