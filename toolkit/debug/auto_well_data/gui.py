@@ -4,9 +4,6 @@
  Will be the maine executable
 """
 
-import os
-
-
 import tkinter.filedialog
 import tkinter as tk
 from tkinter import *
