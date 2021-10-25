@@ -7,6 +7,8 @@
 
 from openpyxl import Workbook, load_workbook
 
+from tkinter import filedialog as fd
+
 
 class SheetsManager:
     def __init__(self, s1=None):
@@ -23,6 +25,9 @@ class SheetsManager:
         
     def get_well_data_path(self):
         return self.well_data_path
+    
+    def select_well_data_popup(self):
+        self.set_well_data_path(fd.askopenfilename(filetypes=[("excel files", ".xlsx")]))
     
     # OpenPyXL functions
     def generate_workbook(self):
