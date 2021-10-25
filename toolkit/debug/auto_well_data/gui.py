@@ -119,6 +119,18 @@ well_data_manager_frame.pack()
 well_data_manager_frame.pack_propagate(False)
 
 
+load_worksheet_button = Button(well_data_manager_frame, 
+                               text="Load Well Data Worksheet", 
+                               command=None, 
+                               pady=5)
+load_worksheet_button.pack()
+
+add_new_entry_button = Button(well_data_manager_frame,
+                              text="Add new manual entry",
+                              command=None,
+                              pady=5)
+add_new_entry_button.pack()
+
 
 def main():
     #root.resizable(False, False)
