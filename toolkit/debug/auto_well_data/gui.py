@@ -141,9 +141,9 @@ add_new_entry_button.pack()
 # can't add an entry to a file that isn't loaded yet
 add_new_entry_button['state'] = "disabled"
 
-# new entry window stuff
-new_manual_entry_frame = LabelFrame()
 
+# TODO REFACTOR!
+# TODO Add ability to select which sheet we're editing
 
 def main():
     #root.resizable(False, False)

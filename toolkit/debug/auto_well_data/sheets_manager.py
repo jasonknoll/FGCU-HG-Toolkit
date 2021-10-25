@@ -7,10 +7,6 @@
 
 from openpyxl import Workbook, load_workbook
 
-"""
- TODO Get Lane's advice so that I can compile all the data
- correctly. I have the data stripped, but now I have to manipulate it.
-"""
 
 class SheetsManager:
     def __init__(self, s1=None):
