@@ -5,7 +5,6 @@
  depths. Afterward a new sheet will be generated
 """
 
-import pandas as pd
 from openpyxl import Workbook, load_workbook
 
 """
@@ -14,28 +13,21 @@ from openpyxl import Workbook, load_workbook
 """
 
 class SheetsManager:
-    def __init__(self, s1=None, s2=None):
-        self.manual_data_path = s1
-        # "Well measurements on campus"
-        self.existing_data_path = s2
-        self.new_sheet = None
+    def __init__(self, s1=None):
+        self.well_data_path = s1
+        self.worksheet_loaded = False
         
         # Workbooks (which haven't been opened yet)
-        self.manual_wb = None
-        self.existing_well_wb = None
-        
-        # Pandas dataframes
-        self.manual_well_data = []
-        self.existing_well_data = []
+        self.wb = None
 
         
-    def set_manual_data_path(self, sheet):
-        self.manual_data_path = sheet
+    def set_well_data_path(self, sheet):
+        self.well_data_path = sheet
         
-    def get_manual_data_path(self):
-        return self.manual_data_path
+    def get_well_data_path(self):
+        return self.well_data_path
             
-    
+    """
     # TODO read all data from the manual entries
     def scrape_manual_sheet(self):
         # First it'll scrape all the sheets to get the wells and create our well objects
@@ -49,17 +41,10 @@ class SheetsManager:
             
         #print(self.wells[0].head()) 
         #print(self.wells[0]['7A I (mm)'])
-        
-            
-        # TODO search through all the rows and columns and put it all into a 2d list?
-        # Create pandas dataframe and work with it?
+    """
     
-    def set_existing_data_path(self, sheet):
-        self.existing_well_data = sheet
-        
-    def get_existing_data_path(self):
-        return self.existing_data_path
     
+"""
     def scrape_existing_sheet(self):
         self.existing_well_wb = pd.ExcelFile(self.get_existing_data_path())
         
@@ -69,15 +54,9 @@ class SheetsManager:
     # TODO Add this for future use (so that it automatically adds the entry for user)
     def add_manual_data_entry(self):
         pass
+"""
         
-    """
+"""
      Combine old and new sheets and do calculations
-     for depth and pressure
-    """
-    def combine_sheets(self):
-        pass
-    
-    # After everything is done, we gotta reupload it to drive
-    def upload_to_google():
-        pass
+"""
         

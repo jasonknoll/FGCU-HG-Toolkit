@@ -10,7 +10,7 @@ from tkinter import *
 
 import html_reader as hr
 
-import sheets_manager as sm
+import sheets_manager
 
 # import openpyxl
 
@@ -111,6 +111,13 @@ well_data_root.geometry("600x600")
 well_data_root.title("Well Data Manager")
 well_data_root.iconbitmap('logoicon.ico')
 
+sm = sheets_manager.SheetsManager()
+
+def load_well_data_worksheet(sm):
+    sm.set_well_file_path(tkinter.filedialog.askopenfilename(filetypes=[("excel files", ".xlsx")]))
+    if (sm.get_well_data_path()):
+        add_new_entry_button['state'] = "enabled"
+
 # Setup label frame for buttons
 well_data_manager_frame = LabelFrame(well_data_root, 
                                      text="Well Data Sheets Manager",
@@ -130,6 +137,8 @@ add_new_entry_button = Button(well_data_manager_frame,
                               command=None,
                               pady=5)
 add_new_entry_button.pack()
+# can't add an entry to a file that isn't loaded yet
+add_new_entry_button['state'] = "disabled"
 
 
 def main():
