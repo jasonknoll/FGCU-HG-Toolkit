@@ -46,7 +46,7 @@ class WellDataGUI(GUI):
     def setup_frames(self):
         load_worksheet_frame = LabelFrame(self.root, 
                                           text="Well Data Sheets Manager",
-                                          width=550,
+                                          width=570,
                                           height=150)
         self.frames.append(load_worksheet_frame)
         
@@ -62,7 +62,7 @@ class WellDataGUI(GUI):
         data_entry_frame = LabelFrame(self.root,
                                       text="Enter Manual Data",
                                       width=570,
-                                      height=150)
+                                      height=200)
         self.frames.append(data_entry_frame)
         
         load_worksheet_button = Button(self.frames[0], 
@@ -71,14 +71,36 @@ class WellDataGUI(GUI):
                                        pady=5)
         self.buttons.append(load_worksheet_button)
         
+        
+        # ----- setup labels and text entries -----
+        # dropdown = ...
+        # dropdown.grid(column=0, row=0)
+        
         date_label = Label(data_entry_frame, 
                            text="Date (mm/dd/yy)", 
-                           justify=CENTER,
-                           pady=5)
-        date_label.grid(column=0, row=0)
+                           justify=CENTER,)
+        date_label.grid(column=0, row=1)
         
         date_entry = Entry(data_entry_frame, bd=3)
-        date_entry.grid(column=0, row=1)
+        date_entry.grid(column= 0, row=2)
+        
+        time_label = Label(data_entry_frame, text="Time (hh:mm AM)")
+        time_label.grid(column=1, row=1)
+        
+        time_entry = Entry(data_entry_frame, bd=3)
+        time_entry.grid(column=1, row=2)
+        
+        measure_label = Label(data_entry_frame, text="Internal water level (mm)")
+        measure_label.grid(column=2, row=1)
+        
+        measure_entry = Entry(data_entry_frame, bd=3)
+        measure_entry.grid(column=2, row=2)
+        
+        submit_button = Button(data_entry_frame, 
+                               text="Submit entry",
+                               command=None, 
+                               pady=5)
+        submit_button.grid(column=0, row=3)
         
         # Diplay default view
         load_worksheet_frame.pack()
@@ -96,8 +118,9 @@ class WellDataGUI(GUI):
         data_entry_frame.grid_columnconfigure(2, minsize=190)
         
         data_entry_frame.grid_rowconfigure(0, minsize=50)
-        data_entry_frame.grid_rowconfigure(1, minsize=50)
-        data_entry_frame.grid_rowconfigure(2, minsize=50)
+        data_entry_frame.grid_rowconfigure(1, minsize=30)
+        data_entry_frame.grid_rowconfigure(2, minsize=30)
+        data_entry_frame.grid_rowconfigure(3, minsize=50)
         
     def check_file_loaded(self):
         if (self.file_loaded):
