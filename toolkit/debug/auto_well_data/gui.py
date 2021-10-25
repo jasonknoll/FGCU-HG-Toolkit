@@ -1,7 +1,7 @@
 """
  Handle the GUI and interactions
  with the user.
- Will be the maine executable
+ Will be the main executable
 """
 
 import tkinter.filedialog
@@ -116,9 +116,9 @@ new_entry_root = None
 sm = sheets_manager.SheetsManager()
 
 def load_well_data_worksheet(sm):
-    sm.set_well_file_path(tkinter.filedialog.askopenfilename(filetypes=[("excel files", ".xlsx")]))
+    sm.set_well_data_path(tkinter.filedialog.askopenfilename(filetypes=[("excel files", ".xlsx")]))
     if (sm.get_well_data_path()):
-        add_new_entry_button['state'] = "enabled"
+        add_new_entry_button['state'] = "active"
 
 # Setup label frame for buttons
 well_data_manager_frame = LabelFrame(well_data_root, 
@@ -130,28 +130,48 @@ well_data_manager_frame.pack_propagate(False)
 
 load_worksheet_button = Button(well_data_manager_frame, 
                                text="Load Well Data Worksheet", 
-                               command=None, 
+                               command=lambda: load_well_data_worksheet(sm), 
                                pady=5)
 load_worksheet_button.pack()
 
-def setup_new_entry_window_labels(n_e_r):
-    date_label = Label(n_e_r, text="Date", justify="left")
-    date_label.pack()
 
-def create_new_entry_window(size="400x400", title="", icon="logoicon.ico"):
+def setup_new_entry_window_labels(new_entry_root, frame):
+    date_label = Label(frame, text="Date (mm/dd/yy)", anchor="w", justify=LEFT)
+    date_label.pack()
+    
+    date_entry = Entry(frame, bd=4)
+    date_entry.pack()
+    
+    time_label = Label(frame, text="Time (hh:mm AM/PM)")
+    time_label.pack()
+    
+    
+    
+    exit_button = Button(frame, text="Exit", command=new_entry_root.destroy)
+    exit_button.pack()
+
+def create_new_entry_window(size="400x400", title="New Manual Data Entry", icon="logoicon.ico"):
     new_entry_root = Tk()
     new_entry_root.geometry(size)
     new_entry_root.title(title)
     new_entry_root.iconbitmap(icon)
     
+    entry_label_frame = LabelFrame(new_entry_root,
+                                   text="New Manual Data Entry",
+                                   width=350,
+                                   height=350,
+                                   bd=4)
+    entry_label_frame.pack()
+    entry_label_frame.pack_propagate(False)
+    
     # Add labels and stuff
-    setup_new_entry_window_labels(new_entry_root)
+    setup_new_entry_window_labels(new_entry_root, entry_label_frame)
     
     new_entry_root.mainloop()
 
 add_new_entry_button = Button(well_data_manager_frame,
                               text="Add new manual entry",
-                              command=None,
+                              command=create_new_entry_window,
                               pady=5)
 add_new_entry_button.pack()
 # can't add an entry to a file that isn't loaded yet
