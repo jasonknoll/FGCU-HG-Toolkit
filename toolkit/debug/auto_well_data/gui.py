@@ -134,12 +134,20 @@ load_worksheet_button = Button(well_data_manager_frame,
                                pady=5)
 load_worksheet_button.pack()
 
+def setup_new_entry_window_labels(n_e_r):
+    date_label = Label(n_e_r, text="Date", justify="left")
+    date_label.pack()
+
 def create_new_entry_window(size="400x400", title="", icon="logoicon.ico"):
     new_entry_root = Tk()
     new_entry_root.geometry(size)
     new_entry_root.title(title)
     new_entry_root.iconbitmap(icon)
-    window_root.mainloop()
+    
+    # Add labels and stuff
+    setup_new_entry_window_labels(new_entry_root)
+    
+    new_entry_root.mainloop()
 
 add_new_entry_button = Button(well_data_manager_frame,
                               text="Add new manual entry",
