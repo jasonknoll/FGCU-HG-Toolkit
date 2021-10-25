@@ -23,6 +23,7 @@ import sheets_manager as sm
 
 # Setup our window
 # TODO organize buttons and labels into frames
+"""
 root = Tk()
 root.geometry("640x480")
 root.title("HG-Well-Data-Toolkit v0.1")
@@ -38,10 +39,6 @@ label_frame.pack()
 
 html_reader = hr.HtmlReader()
 sheets_manager = sm.SheetsManager()
-
-WINDOW_WIDTH = 640
-WINDOW_HEIGHT = 480
-TITLE = "Hydrogeology Well Data Processor v0.1"
 
 # TODO setup connection to google sheets
 connected_to_sheets = False 
@@ -96,12 +93,31 @@ generate_sheet_button.pack()
 
 test_sheets_button = Button(label_frame, text="Test reading sheets", command=sheets_manager.scrape_manual_sheet,pady=5)
 test_sheets_button.pack()
+"""
+
+# ------------------------------
+# New format testing
+
+"""
+ With this window, the user will be given the menu to edit the 
+ well data worksheet. The user will have to select the file first. 
+ Then they will be given the option to add a new entry. 
+ 
+ Soon the user will be able to add the html data, but I don't know how to 
+ process that yet. 
+"""
+well_data_root = Tk()
+well_data_root.geometry("600x600")
+well_data_root.title("Well Data Manager")
+well_data_root.iconbitmap('logoicon.ico')
+
 
 
 def main():
-    root.resizable(False, False)
+    #root.resizable(False, False)
     #root.grid_propagate(False)
-    root.mainloop()
+    #root.mainloop()
+    well_data_root.mainloop()
 
 if __name__ == "__main__":
     main()
