@@ -51,4 +51,5 @@ class SheetsManager:
         self.curr_sheet[f'A{row}'].value = f"=G{row}"
         self.curr_sheet[f'B{row}'].value = f"=H{row}"
         self.curr_sheet[f'C{row}'].value = f"=D{row}/305"
+        self.curr_sheet[f'C{row}'].number_format = '0.00'
         self.curr_sheet[f'D{row}'].value = f"=I{row}"
