@@ -61,8 +61,8 @@ class WellDataGUI(GUI):
         
         data_entry_frame = LabelFrame(self.root,
                                       text="Enter Manual Data",
-                                      width=550,
-                                      height=200)
+                                      width=570,
+                                      height=150)
         self.frames.append(data_entry_frame)
         
         load_worksheet_button = Button(self.frames[0], 
@@ -71,6 +71,16 @@ class WellDataGUI(GUI):
                                        pady=5)
         self.buttons.append(load_worksheet_button)
         
+        date_label = Label(data_entry_frame, 
+                           text="Date (mm/dd/yy)", 
+                           justify=CENTER,
+                           pady=5)
+        date_label.grid(column=0, row=0)
+        
+        date_entry = Entry(data_entry_frame, bd=3)
+        date_entry.grid(column=0, row=1)
+        
+        # Diplay default view
         load_worksheet_frame.pack()
         load_worksheet_frame.pack_propagate(False)
         
@@ -80,13 +90,23 @@ class WellDataGUI(GUI):
         
         loaded_worksheet_label.pack()
         
-        data_entry_frame.pack_propagate(False)
+        data_entry_frame.grid_propagate(False)
+        data_entry_frame.grid_columnconfigure(0, minsize=190)
+        data_entry_frame.grid_columnconfigure(1, minsize=190)
+        data_entry_frame.grid_columnconfigure(2, minsize=190)
+        
+        data_entry_frame.grid_rowconfigure(0, minsize=50)
+        data_entry_frame.grid_rowconfigure(1, minsize=50)
+        data_entry_frame.grid_rowconfigure(2, minsize=50)
         
     def check_file_loaded(self):
         if (self.file_loaded):
             self.frames[1].pack()
         else:
             self.frames[1].pack_forget()
+            
+    def update_file_path_label(self):
+        pass
     
     
 def main():
