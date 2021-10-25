@@ -111,6 +111,13 @@ well_data_root.geometry("600x600")
 well_data_root.title("Well Data Manager")
 well_data_root.iconbitmap('logoicon.ico')
 
+# Setup label frame for buttons
+well_data_manager_frame = LabelFrame(well_data_root, 
+                                     text="Well Data Sheets Manager",
+                                     width=500, height=200)
+well_data_manager_frame.pack()
+well_data_manager_frame.pack_propagate(False)
+
 
 
 def main():
