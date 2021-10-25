@@ -111,6 +111,8 @@ well_data_root.geometry("600x600")
 well_data_root.title("Well Data Manager")
 well_data_root.iconbitmap('logoicon.ico')
 
+new_entry_root = None
+
 sm = sheets_manager.SheetsManager()
 
 def load_well_data_worksheet(sm):
@@ -132,6 +134,13 @@ load_worksheet_button = Button(well_data_manager_frame,
                                pady=5)
 load_worksheet_button.pack()
 
+def create_new_entry_window(size="400x400", title="", icon="logoicon.ico"):
+    new_entry_root = Tk()
+    new_entry_root.geometry(size)
+    new_entry_root.title(title)
+    new_entry_root.iconbitmap(icon)
+    window_root.mainloop()
+
 add_new_entry_button = Button(well_data_manager_frame,
                               text="Add new manual entry",
                               command=None,
@@ -139,6 +148,9 @@ add_new_entry_button = Button(well_data_manager_frame,
 add_new_entry_button.pack()
 # can't add an entry to a file that isn't loaded yet
 add_new_entry_button['state'] = "disabled"
+
+# new entry window stuff
+new_manual_entry_frame = LabelFrame()
 
 
 def main():
