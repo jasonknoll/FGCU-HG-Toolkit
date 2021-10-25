@@ -135,19 +135,31 @@ load_worksheet_button = Button(well_data_manager_frame,
 load_worksheet_button.pack()
 
 
+# TODO Refactor ALL of this code lmao
+# This needs to go into a window class or something
 def setup_new_entry_window_labels(new_entry_root, frame):
     date_label = Label(frame, text="Date (mm/dd/yy)", anchor="w", justify=LEFT)
     date_label.pack()
     
-    date_entry = Entry(frame, bd=4)
+    date_entry = Entry(frame, bd=3)
     date_entry.pack()
     
-    time_label = Label(frame, text="Time (hh:mm AM/PM)")
+    time_label = Label(frame, text="Time (hh:mm AM)")
     time_label.pack()
     
+    time_entry = Entry(frame, bd=3)
+    time_entry.pack()
     
+    i_measurement_label = Label(frame, text="Internal water level (mm)")
+    i_measurement_label.pack()
     
-    exit_button = Button(frame, text="Exit", command=new_entry_root.destroy)
+    i_measurement_entry = Entry(frame, bd=3)
+    i_measurement_entry.pack()
+    
+    submit_button = Button(frame, text="Submit entry", command=None, pady=5)
+    submit_button.pack()
+    
+    exit_button = Button(frame, text="Exit", command=new_entry_root.destroy, pady=5)
     exit_button.pack()
 
 def create_new_entry_window(size="400x400", title="New Manual Data Entry", icon="logoicon.ico"):
