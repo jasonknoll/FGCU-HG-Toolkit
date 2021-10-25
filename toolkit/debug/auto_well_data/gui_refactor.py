@@ -67,7 +67,7 @@ class WellDataGUI(GUI):
         
         load_worksheet_button = Button(self.frames[0], 
                                        text="Load well data workbook",
-                                       command=lambda: self.sm.select_well_data_popup(),
+                                       command=lambda: self.sm.select_well_data_popup(self),
                                        pady=5)
         self.buttons.append(load_worksheet_button)
         
@@ -79,6 +79,14 @@ class WellDataGUI(GUI):
         spacer.pack()
         
         loaded_worksheet_label.pack()
+        
+        data_entry_frame.pack_propagate(False)
+        
+    def check_file_loaded(self):
+        if (self.file_loaded):
+            self.frames[1].pack()
+        else:
+            self.frames[1].pack_forget()
     
     
 def main():

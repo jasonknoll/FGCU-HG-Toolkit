@@ -26,8 +26,10 @@ class SheetsManager:
     def get_well_data_path(self):
         return self.well_data_path
     
-    def select_well_data_popup(self):
+    def select_well_data_popup(self, gui):
         self.set_well_data_path(fd.askopenfilename(filetypes=[("excel files", ".xlsx")]))
+        gui.file_loaded = True 
+        gui.check_file_loaded()
     
     # OpenPyXL functions
     def generate_workbook(self):
