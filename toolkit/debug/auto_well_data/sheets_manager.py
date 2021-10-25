@@ -48,38 +48,7 @@ class SheetsManager:
         self.curr_sheet[f'I{row}'].value = measure
     
     def insert_formula_into_reseults_table(self, row):
-        pass
-            
-    """
-    # TODO read all data from the manual entries
-    def scrape_manual_sheet(self):
-        # First it'll scrape all the sheets to get the wells and create our well objects
-        self.manual_wb = pd.ExcelFile(self.get_manual_data_path())
-        
-        # Store a df of every sheet in our list of sheets
-        for s in self.manual_wb.sheet_names:
-            self.manual_well_data.append(pd.read_excel(self.manual_wb, s))
-            #self.wells.append(pd.read_excel(self.get_manual_data_path(), sheet_name=s))
-            # Maybe have a popup window showing progress?? 
-            
-        #print(self.wells[0].head()) 
-        #print(self.wells[0]['7A I (mm)'])
-    """
-    
-    
-"""
-    def scrape_existing_sheet(self):
-        self.existing_well_wb = pd.ExcelFile(self.get_existing_data_path())
-        
-        for s in self.existing_well_wb.sheet_names:
-            self.existing_well_data.append(pd.read_excel(self.existing_well_wb, s))
-    
-    # TODO Add this for future use (so that it automatically adds the entry for user)
-    def add_manual_data_entry(self):
-        pass
-"""
-        
-"""
-     Combine old and new sheets and do calculations
-"""
-        
+        self.curr_sheet[f'A{row}'].value = f"=G{row}"
+        self.curr_sheet[f'B{row}'].value = f"=H{row}"
+        self.curr_sheet[f'C{row}'].value = f"=D{row}/305"
+        self.curr_sheet[f'D{row}'].value = f"=I{row}"

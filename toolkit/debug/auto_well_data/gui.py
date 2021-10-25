@@ -152,6 +152,7 @@ def handle_workbook(sm, date, time, measure):
     
     next_row = sm.get_next_empty_row_manual_table()
     sm.insert_manual_data_into_row(date_val, time_val, measure_val, next_row)
+    sm.insert_formula_into_reseults_table(next_row)
     sm.save_workbook(sm.get_well_data_path())
     
 
