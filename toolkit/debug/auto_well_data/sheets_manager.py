@@ -9,6 +9,8 @@ from openpyxl import Workbook, load_workbook
 
 from tkinter import filedialog as fd
 
+from dateutil import parser
+
 
 class SheetsManager:
     def __init__(self, s1=None):
@@ -30,6 +32,7 @@ class SheetsManager:
         self.set_well_data_path(fd.askopenfilename(filetypes=[("excel files", ".xlsx")]))
         gui.file_loaded = True 
         gui.check_file_loaded()
+        self.generate_workbook()
     
     # OpenPyXL functions
     def generate_workbook(self):
@@ -39,6 +42,19 @@ class SheetsManager:
         
     def save_workbook(self, path):
         self.wb.save(path)
+        
+    def submit_entry(self, date, time, measure):
+        
+        self.generate_workbook()
+        
+        date_val = parser.parse(date.get())
+        time_val = parser.parse(time.get())
+        measure_val = float(measure.get())
+        
+        next_row = self.get_next_empty_row_manual_table()
+        self.insert_manual_data_into_row(date_val, time_val, measure_val, next_row)
+        self.insert_formula_into_reseults_table(next_row)
+        self.save_workbook(self.get_well_data_path())
         
     def get_next_empty_row_manual_table(self):
         for cell in self.curr_sheet['G']:
