@@ -12,6 +12,8 @@ import html_reader as hr
 
 import sheets_manager
 
+from dateutil import parser
+
 
 # TODO Setup window size
 # Add buttons and shit
@@ -144,11 +146,13 @@ load_worksheet_button.pack()
 def handle_workbook(sm, date, time, measure):
     sm.generate_workbook()
     #print(sm.find_next_empty_row_manual_table())
-    date_val = date.get()
-    time_val = time.get()
-    measure_val = measure.get()
+    date_val = parser.parse(date.get())
+    time_val = parser.parse(time.get())
+    measure_val = float(measure.get())
     
     next_row = sm.get_next_empty_row_manual_table()
+    sm.insert_manual_data_into_row(date_val, time_val, measure_val, next_row)
+    sm.save_workbook(sm.get_well_data_path())
     
 
 # TODO Refactor ALL of this code lmao

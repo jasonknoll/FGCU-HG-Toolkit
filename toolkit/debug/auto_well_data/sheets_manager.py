@@ -47,7 +47,7 @@ class SheetsManager:
         self.curr_sheet[f'H{row}'].value = time
         self.curr_sheet[f'I{row}'].value = measure
     
-    def insert_formula_into_reseults_table(self):
+    def insert_formula_into_reseults_table(self, row):
         pass
             
     """
