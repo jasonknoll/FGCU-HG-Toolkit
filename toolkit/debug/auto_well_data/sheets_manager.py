@@ -19,6 +19,7 @@ class SheetsManager:
         
         # Workbooks (which haven't been opened yet)
         self.wb = None
+        self.curr_sheet = None
 
         
     def set_well_data_path(self, sheet):
@@ -26,6 +27,28 @@ class SheetsManager:
         
     def get_well_data_path(self):
         return self.well_data_path
+    
+    # OpenPyXL functions
+    def generate_workbook(self):
+        self.wb = load_workbook(self.get_well_data_path())
+        self.curr_sheet = self.wb.worksheets[1]
+        #print(self.curr_sheet['G1'].value)
+        
+    def save_workbook(self, path):
+        self.wb.save(path)
+        
+    def get_next_empty_row_manual_table(self):
+        for cell in self.curr_sheet['G']:
+            if not cell.value:
+                return cell.row
+    
+    def insert_manual_data_into_row(self, date, time, measure, row):
+        self.curr_sheet[f'G{row}'].value = date
+        self.curr_sheet[f'H{row}'].value = time
+        self.curr_sheet[f'I{row}'].value = measure
+    
+    def insert_formula_into_reseults_table(self):
+        pass
             
     """
     # TODO read all data from the manual entries

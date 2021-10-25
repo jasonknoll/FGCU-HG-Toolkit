@@ -12,7 +12,6 @@ import html_reader as hr
 
 import sheets_manager
 
-# import openpyxl
 
 # TODO Setup window size
 # Add buttons and shit
@@ -134,10 +133,29 @@ load_worksheet_button = Button(well_data_manager_frame,
                                pady=5)
 load_worksheet_button.pack()
 
+"""
+ Now this function needs to take the data from the entries
+ and spit it into the loaded sheet.
+ 
+ 1. Find the next row in the manual table
+ 2. Insert data
+ 3. Insert formula to corresponding row in the results table
+"""
+def handle_workbook(sm, date, time, measure):
+    sm.generate_workbook()
+    #print(sm.find_next_empty_row_manual_table())
+    date_val = date.get()
+    time_val = time.get()
+    measure_val = measure.get()
+    
+    next_row = sm.get_next_empty_row_manual_table()
+    
 
 # TODO Refactor ALL of this code lmao
 # This needs to go into a window class or something
-def setup_new_entry_window_labels(new_entry_root, frame):
+def setup_new_entry_window_labels(new_entry_root, frame, sm=sm):
+    # TODO create a dropdown to select sheet
+    
     date_label = Label(frame, text="Date (mm/dd/yy)", anchor="w", justify=LEFT)
     date_label.pack()
     
@@ -156,7 +174,10 @@ def setup_new_entry_window_labels(new_entry_root, frame):
     i_measurement_entry = Entry(frame, bd=3)
     i_measurement_entry.pack()
     
-    submit_button = Button(frame, text="Submit entry", command=None, pady=5)
+    submit_button = Button(frame, 
+                           text="Submit entry",
+                           command=lambda: handle_workbook(sm, date_entry, time_entry, i_measurement_entry), 
+                           pady=5)
     submit_button.pack()
     
     exit_button = Button(frame, text="Exit", command=new_entry_root.destroy, pady=5)
