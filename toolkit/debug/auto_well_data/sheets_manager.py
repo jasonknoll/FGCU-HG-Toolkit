@@ -85,10 +85,43 @@ class GoogleManager:
         result = self.sheet.values().get(spreadsheetId=self.test_sheet_id,
                                          range=f'{self.curr_sheet}!G1:G100').execute()
         values = result.get('values', [])
-        print(values[0][0])
+        return len(values)+1
+    
+    def insert_manual_data_into_row(self, date, time, measure, row):
+        self.update_cell(f"{self.curr_sheet}!G{row}", str(date))
+        self.update_cell(f"{self.curr_sheet}!H{row}", str(time))
+        self.update_cell(f"{self.curr_sheet}!I{row}", measure)
         
-    def submit_entry(self):
-        pass
+        # format G and H column
+        requests = []
+        # set to correct column
+        requests.append({
+            "repeatCell": {
+                "range": {
+                  "sheetId": self.test_sheet_id,
+                  "startRowIndex": 0,
+                  "endRowIndex": 0,
+                  "startColumnIndex": 0,
+                  "endColumnIndex": 0
+                },
+                "cell": {
+                  "userEnteredFormat": {
+                    "numberFormat": {
+                      "type": "DATE",
+                      "pattern": "hh:mmam/pm"
+                    }
+                  }
+            }
+        })
+        
+    def submit_entry(self, date, time, measure):
+        date_val = parser.parse(date.get())
+        time_val = parser.parse(time.get())
+        measure_val = float(measure.get())
+        
+        next_row = self.get_next_empty_row_manual_table()
+        #print(next_row)
+        self.insert_manual_data_into_row(date_val, time_val, measure_val, next_row)
     
     def get_well_by_name(self, name):
         for well in self.well_names:
