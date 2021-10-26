@@ -58,6 +58,7 @@ class GoogleManager:
                            '9M', '12M', '30M', '5A', '32M', 
                            '31M', '18M', '2A']
         
+        # just setting it to the first sheet for now
         self.curr_sheet = well_names[0]
         
         """
@@ -103,8 +104,8 @@ class GoogleManager:
         return dropdown
     
     def change_sheet_select(self, var):
-        self.sm.curr_sheet = self.sm.wb[f'{var.get()}']
-        print(self.sm.curr_sheet)
+        self.curr_sheet = self.get_well_by_name(var)
+        print(self.curr_sheet)
     
 class SheetsManager:
     def __init__(self, s1=None):

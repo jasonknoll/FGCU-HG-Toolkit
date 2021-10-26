@@ -9,8 +9,10 @@ import sheets_manager
  as that code was super messy. They should function identically.
 """
 
+ICON = 'logoicon.ico'
+
 class GUI:
-    def __init__(self, size="600x600", title="", icon=None):
+    def __init__(self, size="600x600", title="", icon=ICON):
         self.window_size = size
         self.window_title = title
         self.window_icon = icon
@@ -26,9 +28,16 @@ class GUI:
         self.buttons = []
     
 
+class OpeningGUI(GUI):
+    def __init__(self, size="200x200", title="Well Data Manger", icon=ICON):
+        super().__init__(size, title, icon)
+        self.frame = LabelFrame(self.root, 
+                                text="Select Excel or Sheets",
+                                width=180,
+                                height=180)
 
 class WellDataGUI(GUI):
-    def __init__(self, size="640x370", title="", icon=None, sm=sheets_manager.SheetsManager()):
+    def __init__(self, size="640x370", title="", icon=ICON, sm=sheets_manager.SheetsManager()):
         super().__init__(size, title, icon)
         self.file_loaded = False
         self.sm = sm
@@ -148,12 +157,14 @@ class WellDataGUI(GUI):
     
     
 def main():
+    """
     window = WellDataGUI(title="Hydrogeology Well Data Processor v0.5",
                          icon='logoicon.ico')
     window.setup_frames()
     
     googleman = sheets_manager.GoogleManager()
     window.root.mainloop()
+    """
     
     
 
