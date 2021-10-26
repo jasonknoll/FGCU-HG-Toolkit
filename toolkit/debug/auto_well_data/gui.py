@@ -29,7 +29,7 @@ class GUI:
     
 
 class MainMenu(GUI):
-    def __init__(self, size="200x200", title="Well Data Manger", icon=ICON):
+    def __init__(self, size="200x120", title="Well Data Manger", icon=ICON):
         super().__init__(size, title, icon)
         self.frame = LabelFrame(self.root, 
                                 text="Select Excel or Sheets",
@@ -38,25 +38,85 @@ class MainMenu(GUI):
         
         select_excel_button = Button(self.frame,
                                       text="Excel",
-                                      command=None)
+                                      command=self.select_excel)
         select_excel_button.pack()
+        
+        spacer = Label(self.frame, pady=5)
+        spacer.pack()
         
         select_google_sheets_button = Button(self.frame,
                                              text="Google Sheets",
-                                             command=None)
-        select_google_sheet_button.pack()
+                                             command=self.select_google_sheets)
+        select_google_sheets_button.pack()
             
         self.frame.pack()
         
     def select_excel(self):
         excel_gui = WellDataGUI(title="Well Data Excel Processor")
         excel_gui.setup_frames()
-        window.root.mainloop()
+        excel_gui.root.mainloop()
         
     def select_google_sheets(self):
-        pass
-        # google_sheets_gui = SheetsGUI(title="Well Data Google Sheets Processor")
+        sheets_gui = GoogleSheetsGUI()
+        sheets_gui.setup_frame()
+        sheets_gui.root.mainloop()
+        
+
+class GoogleSheetsGUI(GUI):
+    def __init__(self, size="640x200", title="Google Sheets Manual Data Entry", icon=ICON, gm=sheets_manager.GoogleManager()):
+        super().__init__(size, title, icon)
+        self.gm = gm
+        if (not gm):
+            self.gm = sheets_manager.GoogleManager()
             
+    def setup_frame(self):
+        entry_frame = LabelFrame(self.root,
+                                 text="Manual Data Entry",
+                                 width=570,
+                                 height=150)
+        
+        
+        date_label = Label(entry_frame, 
+                           text="Date (mm/dd/yy)", 
+                           justify=CENTER)
+        date_label.grid(column=0, row=1)
+        
+        date_entry = Entry(entry_frame, bd=3)
+        date_entry.grid(column= 0, row=2)
+        
+        
+        time_label = Label(entry_frame, text="Time (hh:mm AM)")
+        time_label.grid(column=1, row=1)
+        
+        time_entry = Entry(entry_frame, bd=3)
+        time_entry.grid(column=1, row=2)
+        
+        
+        measure_label = Label(entry_frame, text="Internal water level (mm)")
+        measure_label.grid(column=2, row=1)
+        
+        measure_entry = Entry(entry_frame, bd=3)
+        measure_entry.grid(column=2, row=2)
+        
+        
+        submit_button = Button(entry_frame, 
+                               text="Submit entry",
+                               command=None, 
+                               pady=5)
+        submit_button.grid(column=0, row=3)
+        
+        
+        entry_frame.pack()
+        entry_frame.pack_propagate(False)
+        
+        entry_frame.grid_columnconfigure(0, minsize=190)
+        entry_frame.grid_columnconfigure(1, minsize=190)
+        entry_frame.grid_columnconfigure(2, minsize=190)
+        
+        data_entry_frame.grid_rowconfigure(0, minsize=50)
+        data_entry_frame.grid_rowconfigure(1, minsize=30)
+        data_entry_frame.grid_rowconfigure(2, minsize=30)
+        data_entry_frame.grid_rowconfigure(3, minsize=50)
 
 class WellDataGUI(GUI):
     def __init__(self, size="640x370", title="", icon=ICON, sm=sheets_manager.SheetsManager()):
@@ -102,7 +162,7 @@ class WellDataGUI(GUI):
         
         date_label = Label(data_entry_frame, 
                            text="Date (mm/dd/yy)", 
-                           justify=CENTER,)
+                           justify=CENTER)
         date_label.grid(column=0, row=1)
         
         date_entry = Entry(data_entry_frame, bd=3)
@@ -187,7 +247,8 @@ def main():
     googleman = sheets_manager.GoogleManager()
     window.root.mainloop()
     """
-    
+    menu = MainMenu()
+    menu.root.mainloop()
     
 
 if __name__ == "__main__":

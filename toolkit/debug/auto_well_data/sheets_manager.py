@@ -59,7 +59,7 @@ class GoogleManager:
                            '31M', '18M', '2A']
         
         # just setting it to the first sheet for now
-        self.curr_sheet = well_names[0]
+        self.curr_sheet = self.well_names[0]
         
         """
         self.result = self.sheet.values().get(spreadsheetId=self.test_sheet_id,
