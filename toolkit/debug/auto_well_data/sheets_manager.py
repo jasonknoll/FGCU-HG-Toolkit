@@ -47,17 +47,35 @@ class GoogleManager:
             with open('googlesheets/token.json', 'w') as token:
                 token.write(creds.to_json())
     
-        service = build('sheets', 'v4', credentials=creds)
+        self.service = build('sheets', 'v4', credentials=creds)
 
         # Call the Sheets API
-        sheet = service.spreadsheets()
-        result = sheet.values().get(spreadsheetId=self.test_sheet_id,
+        self.sheet = self.service.spreadsheets()
+        self.result = self.sheet.values().get(spreadsheetId=self.test_sheet_id,
                                          range="22M!A2:D13").execute()
-        values = result.get('values', [])
-        print(values[0][0]) # E1
-        print(values[1][0]) # E2
+        self.values = self.result.get('values', [])
+        
+        self.sheet.values().update(spreadsheetId=self.test_sheet_id, 
+                                   range="22M!A22", 
+                                   body={'values': [["=A4"]]},
+                                   valueInputOption="USER_ENTERED").execute()
+        
+        print(self.values[0][0]) # A2
+        print(self.values[1][0]) # A3
+        #print(self.values[20][0]) # A22
         
         # TODO figure out how to change values in the sheet directly
+        
+        
+    def update_cell(self, cell, value):
+        self.sheet.values().update(spreadsheetId=self.test_sheet_id, 
+                                   range=cell, 
+                                   body={'values':[[value]]},
+                                   valueInputOption="USER_ENTERED").execute()
+        print("updated")
+    
+    def get_next_empty_row_manual_table(self):
+        pass
     
 class SheetsManager:
     def __init__(self, s1=None):
