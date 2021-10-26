@@ -136,11 +136,38 @@ class GoogleManager:
                     },
                     "fields": "userEnteredFormat.numberFormat"
                   }
+                },
+                {
+                  "repeatCell": {
+                    "range": {
+                      "sheetId": self.sheet_ids[f'{self.curr_sheet}'],
+                      "startRowIndex": 2,
+                      "endRowIndex": row,
+                      "startColumnIndex": 8,
+                      "endColumnIndex": 9
+                    },
+                    "cell": {
+                      "userEnteredFormat": {
+                        "numberFormat": {
+                          "type": "NUMBER",
+                          "pattern": "0.00"
+                        }
+                      }
+                    },
+                    "fields": "userEnteredFormat.numberFormat"
+                  }
                 }
             ]}
         
         self.sheet.batchUpdate(spreadsheetId=self.test_sheet_id,
                                body=reqs).execute()
+        
+    def insert_formula_into_results_table(self, row):
+        self.update_cell(f'{self.curr_sheet}!A{row}', f'=G{row}')
+        self.update_cell(f'{self.curr_sheet}!B{row}', f'=H{row}')
+        
+        self.update_cell(f'{self.curr_sheet}!C{row}', f'=D{row}/305')
+        self.update_cell(f'{self.curr_sheet}!D{row}', f'=I{row}')
         
     def submit_entry(self, date, time, measure):
         date_val = parser.parse(date.get())
@@ -150,6 +177,7 @@ class GoogleManager:
         next_row = self.get_next_empty_row_manual_table()
         #print(next_row)
         self.insert_manual_data_into_row(date_val, time_val, measure_val, next_row)
+        self.insert_formula_into_results_table(next_row)
     
     def get_well_by_name(self, name):
         for well in self.well_names:
@@ -219,7 +247,7 @@ class SheetsManager:
         
         next_row = self.get_next_empty_row_manual_table()
         self.insert_manual_data_into_row(date_val, time_val, measure_val, next_row)
-        self.insert_formula_into_reseults_table(next_row)
+        self.insert_formula_into_results_table(next_row)
         self.save_workbook(self.get_well_data_path())
         
         
@@ -237,7 +265,7 @@ class SheetsManager:
         self.curr_sheet[f'H{row}'].value = time
         self.curr_sheet[f'I{row}'].value = measure
     
-    def insert_formula_into_reseults_table(self, row):
+    def insert_formula_into_results_table(self, row):
         self.curr_sheet[f'A{row}'].value = f"=G{row}"
         self.curr_sheet[f'B{row}'].value = f"=H{row}"
         self.curr_sheet[f'C{row}'].value = f"=D{row}/305"
