@@ -88,7 +88,7 @@ class GoogleManager:
                                    range=cell_range, 
                                    body={'values':[[value]]},
                                    valueInputOption="USER_ENTERED").execute()
-        print("updated")
+        print("{cell_range} updated")
     
     def get_next_empty_row_manual_table(self):
         result = self.sheet.values().get(spreadsheetId=self.test_sheet_id,
@@ -101,7 +101,7 @@ class GoogleManager:
         self.update_cell(f"{self.curr_sheet}!G{row}", str(date))
         self.update_cell(f"{self.curr_sheet}!H{row}", str(time))
         self.update_cell(f"{self.curr_sheet}!I{row}", measure)
-        print(row)
+        print(f'Next row: {row}')
         
         # set to correct column
         reqs = {'requests': [

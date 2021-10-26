@@ -248,7 +248,7 @@ class WellDataGUI(GUI):
     
 def main():
     """
-    window = WellDataGUI(title="Hydrogeology Well Data Processor v0.5",
+    window = WellDataGUI(title="Hydrogeology Well Data Processor v0.7",
                          icon='logoicon.ico')
     window.setup_frames()
     
