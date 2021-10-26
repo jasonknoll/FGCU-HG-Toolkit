@@ -88,31 +88,38 @@ class GoogleManager:
         return len(values)+1
     
     def insert_manual_data_into_row(self, date, time, measure, row):
+        
         self.update_cell(f"{self.curr_sheet}!G{row}", str(date))
         self.update_cell(f"{self.curr_sheet}!H{row}", str(time))
         self.update_cell(f"{self.curr_sheet}!I{row}", measure)
+        print(row)
         
-        # format G and H column
-        requests = []
         # set to correct column
-        requests.append({
-            "repeatCell": {
-                "range": {
-                  "sheetId": self.test_sheet_id,
-                  "startRowIndex": 0,
-                  "endRowIndex": 0,
-                  "startColumnIndex": 0,
-                  "endColumnIndex": 0
-                },
-                "cell": {
-                  "userEnteredFormat": {
-                    "numberFormat": {
-                      "type": "DATE",
-                      "pattern": "hh:mmam/pm"
-                    }
+        reqs = {'requests': [
+            {
+                "repeatCell": {
+                    "range": {
+                      "sheetId": 1433469438,
+                      "startRowIndex": 2,
+                      "endRowIndex": row,
+                      "startColumnIndex": 6,
+                      "endColumnIndex": 7
+                    },
+                    "cell": {
+                      "userEnteredFormat": {
+                        "numberFormat": {
+                          "type": "DATE",
+                          "pattern": "mm/dd/yy"
+                        }
+                      }
+                    },
+                    "fields": "userEnteredFormat.numberFormat"
                   }
             }
-        })
+            ]}
+        
+        self.sheet.batchUpdate(spreadsheetId=self.test_sheet_id,
+                               body=reqs).execute()
         
     def submit_entry(self, date, time, measure):
         date_val = parser.parse(date.get())
@@ -124,9 +131,12 @@ class GoogleManager:
         self.insert_manual_data_into_row(date_val, time_val, measure_val, next_row)
     
     def get_well_by_name(self, name):
+        count = 0
         for well in self.well_names:
             if name == well:
-                return well
+                return well, count
+            else:
+                count += 1
     
     def setup_dropdown(self, frame):
         
