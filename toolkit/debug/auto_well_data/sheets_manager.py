@@ -36,19 +36,23 @@ class SheetsManager:
         gui.file_loaded = True 
         gui.check_file_loaded()
         self.generate_workbook()
+        gui.setup_dropdown(gui.frames[1])
     
     # OpenPyXL functions
     def generate_workbook(self):
         self.wb = load_workbook(self.get_well_data_path())
         self.curr_sheet = self.wb.worksheets[1]
+        # setup sheet names (so we can select all the different sheets)
+        for i in self.wb.sheetnames[1:len(self.wb.sheetnames)-1]:
+            self.well_names.append(i)
+            
+        print(self.well_names)
         #print(self.curr_sheet['G1'].value)
         
     def save_workbook(self, path):
         self.wb.save(path)
         
     def submit_entry(self, date, time, measure):
-        
-        self.generate_workbook()
         
         date_val = parser.parse(date.get())
         time_val = parser.parse(time.get())
@@ -59,11 +63,6 @@ class SheetsManager:
         self.insert_formula_into_reseults_table(next_row)
         self.save_workbook(self.get_well_data_path())
         
-        # setup sheet names (so we can select all the different sheets)
-        for i in self.wb.sheetnames[1:len(self.wb.sheetnames)-1]:
-            self.well_names.append(i)
-            
-        print(self.well_names)
         
         date.delete(0, END)
         time.delete(0, END)

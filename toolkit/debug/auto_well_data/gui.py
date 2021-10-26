@@ -67,8 +67,6 @@ class WellDataGUI(GUI):
         
         # ----- setup labels and text entries -----
         
-        # dropdown = ...
-        # dropdown.grid(column=0, row=0)
         
         
         date_label = Label(data_entry_frame, 
@@ -130,6 +128,23 @@ class WellDataGUI(GUI):
             
     def update_file_path_label(self):
         pass
+    
+    def setup_dropdown(self, frame):
+        var = StringVar(frame)
+        var.set(self.sm.well_names[0])
+        dropdown = OptionMenu(frame, var, *self.sm.well_names)
+        dropdown.grid(column=0, row=0)
+        
+        select_sheet_button = Button(frame, 
+                                     command=lambda: self.change_sheet_select(var),
+                                     text="Select sheet")
+        select_sheet_button.grid(column=1, row=0)
+        
+        return dropdown
+    
+    def change_sheet_select(self, var):
+        self.sm.curr_sheet = self.sm.wb[f'{var.get()}']
+        print(self.sm.curr_sheet)
     
     
 def main():
