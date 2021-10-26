@@ -35,6 +35,28 @@ class MainMenu(GUI):
                                 text="Select Excel or Sheets",
                                 width=180,
                                 height=180)
+        
+        select_excel_button = Button(self.frame,
+                                      text="Excel",
+                                      command=None)
+        select_excel_button.pack()
+        
+        select_google_sheets_button = Button(self.frame,
+                                             text="Google Sheets",
+                                             command=None)
+        select_google_sheet_button.pack()
+            
+        self.frame.pack()
+        
+    def select_excel(self):
+        excel_gui = WellDataGUI(title="Well Data Excel Processor")
+        excel_gui.setup_frames()
+        window.root.mainloop()
+        
+    def select_google_sheets(self):
+        pass
+        # google_sheets_gui = SheetsGUI(title="Well Data Google Sheets Processor")
+            
 
 class WellDataGUI(GUI):
     def __init__(self, size="640x370", title="", icon=ICON, sm=sheets_manager.SheetsManager()):
