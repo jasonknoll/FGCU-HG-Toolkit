@@ -21,6 +21,8 @@ class SheetsManager:
         # Workbooks (which haven't been opened yet)
         self.wb = None
         self.curr_sheet = None
+        
+        self.well_names = []
 
         
     def set_well_data_path(self, sheet):
@@ -56,6 +58,12 @@ class SheetsManager:
         self.insert_manual_data_into_row(date_val, time_val, measure_val, next_row)
         self.insert_formula_into_reseults_table(next_row)
         self.save_workbook(self.get_well_data_path())
+        
+        # setup sheet names (so we can select all the different sheets)
+        for i in self.wb.sheetnames[1:len(self.wb.sheetnames)-1]:
+            self.well_names.append(i)
+            
+        print(self.well_names)
         
         date.delete(0, END)
         time.delete(0, END)
