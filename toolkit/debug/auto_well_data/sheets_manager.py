@@ -8,6 +8,7 @@
 from openpyxl import Workbook, load_workbook
 
 from tkinter import filedialog as fd
+from tkinter import *
 
 from dateutil import parser
 
@@ -55,6 +56,10 @@ class SheetsManager:
         self.insert_manual_data_into_row(date_val, time_val, measure_val, next_row)
         self.insert_formula_into_reseults_table(next_row)
         self.save_workbook(self.get_well_data_path())
+        
+        date.delete(0, END)
+        time.delete(0, END)
+        measure.delete(0, END)
         
     def get_next_empty_row_manual_table(self):
         for cell in self.curr_sheet['G']:
