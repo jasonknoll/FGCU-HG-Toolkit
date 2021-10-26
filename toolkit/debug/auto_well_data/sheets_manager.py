@@ -56,9 +56,16 @@ class GoogleManager:
                            '33M', 'U1', '27M', '6A', '28M', 
                            '29M', '11M', '10M', '7M', '1A', 
                            '9M', '12M', '30M', '5A', '32M', 
-                           '31M', '18M', '2A']
+                           '31M', '18M', '2A', '21M']
         
-        self.sheet_ids = {'22M': 1433469438}
+        self.sheet_ids = {'22M': 1433469438, '3A': 480038452, 'MA': 707076060,
+                          'MM':667590206, '5M': 898518076,'33M': 1686866287, 
+                          'U1': 120162556, '27M': 960853423, '6A': 1309453391,
+                          '28M': 2001958210,'29M': 1190619554, '11M': 2115651106,
+                          '10M': 1181736078, '7M': 1307550729, '1A': 949756171, 
+                           '9M': 67766467, '12M': 634987115, '30M': 674108455,
+                           '5A': 44526233, '32M': 2024305940,'31M':1711889157,
+                           '18M': 620154557, '2A': 1467669751, '21M': 1894757020}
         
         # just setting it to the first sheet for now
         self.curr_sheet = self.well_names[0]
@@ -145,6 +152,26 @@ class GoogleManager:
                       "endRowIndex": row,
                       "startColumnIndex": 8,
                       "endColumnIndex": 9
+                    },
+                    "cell": {
+                      "userEnteredFormat": {
+                        "numberFormat": {
+                          "type": "NUMBER",
+                          "pattern": "0.00"
+                        }
+                      }
+                    },
+                    "fields": "userEnteredFormat.numberFormat"
+                  }
+                },
+                {
+                  "repeatCell": {
+                    "range": {
+                      "sheetId": self.sheet_ids[f'{self.curr_sheet}'],
+                      "startRowIndex": 2,
+                      "endRowIndex": row,
+                      "startColumnIndex": 2,
+                      "endColumnIndex": 3
                     },
                     "cell": {
                       "userEnteredFormat": {

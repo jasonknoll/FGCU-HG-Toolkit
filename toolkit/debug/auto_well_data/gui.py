@@ -55,11 +55,13 @@ class MainMenu(GUI):
         excel_gui = WellDataGUI(title="Well Data Excel Processor")
         excel_gui.setup_frames()
         excel_gui.root.mainloop()
+        excel_gui.root.quit()
         
     def select_google_sheets(self):
         sheets_gui = GoogleSheetsGUI()
         sheets_gui.setup_frame()
         sheets_gui.root.mainloop()
+        sheets_gui.root.quit()
         
 
 class GoogleSheetsGUI(GUI):
@@ -255,6 +257,8 @@ def main():
     """
     menu = MainMenu()
     menu.root.mainloop()
+    menu.root.quit()
+    
     
 
 if __name__ == "__main__":
