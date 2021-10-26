@@ -24,6 +24,7 @@ class GoogleManager:
     def __init__(self):
         self.scopes = ['https://www.googleapis.com/auth/spreadsheets']
         self.old_sheet_id = '1RCAEGJuKwnAstDoXLw9eoRIZoJZMe2ZKNsTFyehBaVo'
+        self.test_sheet_id = '1u8uMAEu6FZPHEoKERau1R_emPtARuAPBbDWfZZvY6Ao'
         
         """Shows basic usage of the Sheets API.
         Prints values from a sample spreadsheet.
@@ -50,8 +51,8 @@ class GoogleManager:
 
         # Call the Sheets API
         sheet = service.spreadsheets()
-        result = sheet.values().get(spreadsheetId=self.old_sheet_id,
-                                         range="E1:H3").execute()
+        result = sheet.values().get(spreadsheetId=self.test_sheet_id,
+                                         range="22M!A2:D13").execute()
         values = result.get('values', [])
         print(values[0][0]) # E1
         print(values[1][0]) # E2
