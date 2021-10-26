@@ -101,7 +101,7 @@ class GoogleSheetsGUI(GUI):
         
         submit_button = Button(entry_frame, 
                                text="Submit entry",
-                               command=None, 
+                               command=self.gm.get_next_empty_row_manual_table, 
                                pady=5)
         submit_button.grid(column=0, row=3)
         

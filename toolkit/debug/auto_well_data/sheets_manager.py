@@ -82,6 +82,12 @@ class GoogleManager:
         print("updated")
     
     def get_next_empty_row_manual_table(self):
+        result = self.sheet.values().get(spreadsheetId=self.test_sheet_id,
+                                         range=f'{self.curr_sheet}!G1:G100').execute()
+        values = result.get('values', [])
+        print(values[0][0])
+        
+    def submit_entry(self):
         pass
     
     def get_well_by_name(self, name):
