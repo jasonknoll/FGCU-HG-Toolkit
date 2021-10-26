@@ -151,7 +151,11 @@ def main():
     window = WellDataGUI(title="Hydrogeology Well Data Processor v0.5",
                          icon='logoicon.ico')
     window.setup_frames()
+    
+    googleman = sheets_manager.GoogleManager()
     window.root.mainloop()
+    
+    
 
 if __name__ == "__main__":
     main()

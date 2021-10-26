@@ -5,6 +5,13 @@
  depths. Afterward a new sheet will be generated
 """
 
+from __future__ import print_function
+import os.path
+from googleapiclient.discovery import build
+from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
+from google.oauth2.credentials import Credentials
+
 from openpyxl import Workbook, load_workbook
 
 from tkinter import filedialog as fd
@@ -13,6 +20,44 @@ from tkinter import *
 from dateutil import parser
 
 
+class GoogleManager:
+    def __init__(self):
+        self.scopes = ['https://www.googleapis.com/auth/spreadsheets']
+        self.old_sheet_id = '1RCAEGJuKwnAstDoXLw9eoRIZoJZMe2ZKNsTFyehBaVo'
+        
+        """Shows basic usage of the Sheets API.
+        Prints values from a sample spreadsheet.
+        """
+        creds = None
+        # The file token.json stores the user's access and refresh tokens, and is
+        # created automatically when the authorization flow completes for the first
+        # time.
+        if os.path.exists('googlesheets/token.json'):
+            creds = Credentials.from_authorized_user_file('googlesheets/token.json', self.scopes)
+        # If there are no (valid) credentials available, let the user log in.
+        if not creds or not creds.valid:
+            if creds and creds.expired and creds.refresh_token:
+                creds.refresh(Request())
+            else:
+                flow = InstalledAppFlow.from_client_secrets_file(
+                    'googlesheets/credentials.json', self.scopes)
+                creds = flow.run_local_server(port=0)
+            # Save the credentials for the next run
+            with open('googlesheets/token.json', 'w') as token:
+                token.write(creds.to_json())
+    
+        service = build('sheets', 'v4', credentials=creds)
+
+        # Call the Sheets API
+        sheet = service.spreadsheets()
+        result = sheet.values().get(spreadsheetId=self.old_sheet_id,
+                                         range="E1:H3").execute()
+        values = result.get('values', [])
+        print(values[0][0]) # E1
+        print(values[1][0]) # E2
+        
+        # TODO figure out how to change values in the sheet directly
+    
 class SheetsManager:
     def __init__(self, s1=None):
         self.well_data_path = s1
@@ -46,7 +91,7 @@ class SheetsManager:
         for i in self.wb.sheetnames[1:len(self.wb.sheetnames)-1]:
             self.well_names.append(i)
             
-        print(self.well_names)
+        #print(self.well_names)
         #print(self.curr_sheet['G1'].value)
         
     def save_workbook(self, path):
