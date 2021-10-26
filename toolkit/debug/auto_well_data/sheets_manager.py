@@ -51,31 +51,60 @@ class GoogleManager:
 
         # Call the Sheets API
         self.sheet = self.service.spreadsheets()
+        
+        self.well_names = ['22M', '3A', 'MA', 'MM', '5M', 
+                           '33M', 'U1', '27M', '6A', '28M', 
+                           '29M', '11M', '10M', '7M', '1A', 
+                           '9M', '12M', '30M', '5A', '32M', 
+                           '31M', '18M', '2A']
+        
+        self.curr_sheet = well_names[0]
+        
+        """
         self.result = self.sheet.values().get(spreadsheetId=self.test_sheet_id,
                                          range="22M!A2:D13").execute()
         self.values = self.result.get('values', [])
         
-        self.sheet.values().update(spreadsheetId=self.test_sheet_id, 
-                                   range="22M!A22", 
-                                   body={'values': [["=A4"]]},
-                                   valueInputOption="USER_ENTERED").execute()
         
         print(self.values[0][0]) # A2
         print(self.values[1][0]) # A3
         #print(self.values[20][0]) # A22
+        """
         
-        # TODO figure out how to change values in the sheet directly
         
-        
-    def update_cell(self, cell, value):
+    # Range formatted 'Sheetname!Cell1:Cell2'    
+    def update_cell(self, cell_range, value):
         self.sheet.values().update(spreadsheetId=self.test_sheet_id, 
-                                   range=cell, 
+                                   range=cell_range, 
                                    body={'values':[[value]]},
                                    valueInputOption="USER_ENTERED").execute()
         print("updated")
     
     def get_next_empty_row_manual_table(self):
         pass
+    
+    def get_well_by_name(self, name):
+        for well in self.well_names:
+            if name == well:
+                return well
+    
+    def setup_dropdown(self, frame):
+        
+        var = StringVar(frame)
+        var.set(self.well_names[0])
+        dropdown = OptionMenu(frame, var, *self.well_names)
+        dropdown.grid(column=0, row=0)
+        
+        select_sheet_button = Button(frame, 
+                                     command=lambda: self.change_sheet_select(var),
+                                     text="Select sheet")
+        select_sheet_button.grid(column=1, row=0)
+        
+        return dropdown
+    
+    def change_sheet_select(self, var):
+        self.sm.curr_sheet = self.sm.wb[f'{var.get()}']
+        print(self.sm.curr_sheet)
     
 class SheetsManager:
     def __init__(self, s1=None):
@@ -110,7 +139,7 @@ class SheetsManager:
         for i in self.wb.sheetnames[1:len(self.wb.sheetnames)-1]:
             self.well_names.append(i)
             
-        #print(self.well_names)
+        print(self.well_names)
         #print(self.curr_sheet['G1'].value)
         
     def save_workbook(self, path):
