@@ -94,17 +94,15 @@ class GoogleManager:
         var = StringVar(frame)
         var.set(self.well_names[0])
         dropdown = OptionMenu(frame, var, *self.well_names)
-        dropdown.grid(column=0, row=0)
         
         select_sheet_button = Button(frame, 
                                      command=lambda: self.change_sheet_select(var),
                                      text="Select sheet")
-        select_sheet_button.grid(column=1, row=0)
         
-        return dropdown
+        return dropdown, select_sheet_button
     
     def change_sheet_select(self, var):
-        self.curr_sheet = self.get_well_by_name(var)
+        self.curr_sheet = self.get_well_by_name(var.get())
         print(self.curr_sheet)
     
 class SheetsManager:

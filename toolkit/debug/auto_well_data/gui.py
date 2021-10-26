@@ -106,17 +106,23 @@ class GoogleSheetsGUI(GUI):
         submit_button.grid(column=0, row=3)
         
         
-        entry_frame.pack()
-        entry_frame.pack_propagate(False)
+        
         
         entry_frame.grid_columnconfigure(0, minsize=190)
         entry_frame.grid_columnconfigure(1, minsize=190)
         entry_frame.grid_columnconfigure(2, minsize=190)
         
-        data_entry_frame.grid_rowconfigure(0, minsize=50)
-        data_entry_frame.grid_rowconfigure(1, minsize=30)
-        data_entry_frame.grid_rowconfigure(2, minsize=30)
-        data_entry_frame.grid_rowconfigure(3, minsize=50)
+        entry_frame.grid_rowconfigure(0, minsize=50)
+        entry_frame.grid_rowconfigure(1, minsize=30)
+        entry_frame.grid_rowconfigure(2, minsize=30)
+        entry_frame.grid_rowconfigure(3, minsize=50)
+        
+        dropdown, select_sheet_button = self.gm.setup_dropdown(entry_frame)
+        dropdown.grid(column=0, row=0)
+        select_sheet_button.grid(column=1, row=0)
+        
+        entry_frame.pack()
+        entry_frame.pack_propagate(False)
 
 class WellDataGUI(GUI):
     def __init__(self, size="640x370", title="", icon=ICON, sm=sheets_manager.SheetsManager()):
