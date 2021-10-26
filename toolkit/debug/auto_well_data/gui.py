@@ -28,7 +28,7 @@ class GUI:
         self.buttons = []
     
 
-class OpeningGUI(GUI):
+class MainMenu(GUI):
     def __init__(self, size="200x200", title="Well Data Manger", icon=ICON):
         super().__init__(size, title, icon)
         self.frame = LabelFrame(self.root, 
