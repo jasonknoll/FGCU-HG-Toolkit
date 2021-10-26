@@ -58,6 +58,8 @@ class GoogleManager:
                            '9M', '12M', '30M', '5A', '32M', 
                            '31M', '18M', '2A']
         
+        self.sheet_ids = {'22M': 1433469438}
+        
         # just setting it to the first sheet for now
         self.curr_sheet = self.well_names[0]
         
@@ -99,7 +101,7 @@ class GoogleManager:
             {
                 "repeatCell": {
                     "range": {
-                      "sheetId": 1433469438,
+                      "sheetId": self.sheet_ids[f'{self.curr_sheet}'],
                       "startRowIndex": 2,
                       "endRowIndex": row,
                       "startColumnIndex": 6,
@@ -115,7 +117,26 @@ class GoogleManager:
                     },
                     "fields": "userEnteredFormat.numberFormat"
                   }
-            }
+            }, {
+                "repeatCell": {
+                    "range": {
+                      "sheetId": self.sheet_ids[f'{self.curr_sheet}'],
+                      "startRowIndex": 2,
+                      "endRowIndex": row,
+                      "startColumnIndex": 7,
+                      "endColumnIndex": 8
+                    },
+                    "cell": {
+                      "userEnteredFormat": {
+                        "numberFormat": {
+                          "type": "DATE",
+                          "pattern": "hh:mm am/pm"
+                        }
+                      }
+                    },
+                    "fields": "userEnteredFormat.numberFormat"
+                  }
+                }
             ]}
         
         self.sheet.batchUpdate(spreadsheetId=self.test_sheet_id,
@@ -131,12 +152,9 @@ class GoogleManager:
         self.insert_manual_data_into_row(date_val, time_val, measure_val, next_row)
     
     def get_well_by_name(self, name):
-        count = 0
         for well in self.well_names:
             if name == well:
-                return well, count
-            else:
-                count += 1
+                return well
     
     def setup_dropdown(self, frame):
         
