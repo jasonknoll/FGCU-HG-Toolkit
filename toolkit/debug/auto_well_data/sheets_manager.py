@@ -19,6 +19,7 @@ from tkinter import *
 
 from dateutil import parser
 
+# Sheets and google manager are very similar. May refactor to combine
 
 class GoogleManager:
     def __init__(self):
@@ -26,8 +27,9 @@ class GoogleManager:
         self.old_sheet_id = '1RCAEGJuKwnAstDoXLw9eoRIZoJZMe2ZKNsTFyehBaVo'
         self.test_sheet_id = '1u8uMAEu6FZPHEoKERau1R_emPtARuAPBbDWfZZvY6Ao'
         
-        """Shows basic usage of the Sheets API.
-        Prints values from a sample spreadsheet.
+        """
+         Shows basic usage of the Sheets API.
+         Connects to sheets
         """
         creds = None
         # The file token.json stores the user's access and refresh tokens, and is
@@ -52,6 +54,7 @@ class GoogleManager:
         # Call the Sheets API
         self.sheet = self.service.spreadsheets()
         
+        # manually setup sheet names and ids
         self.well_names = ['22M', '3A', 'MA', 'MM', '5M', 
                            '33M', 'U1', '27M', '6A', '28M', 
                            '29M', '11M', '10M', '7M', '1A', 
@@ -71,6 +74,7 @@ class GoogleManager:
         self.curr_sheet = self.well_names[0]
         
         """
+        # how to print/access values
         self.result = self.sheet.values().get(spreadsheetId=self.test_sheet_id,
                                          range="22M!A2:D13").execute()
         self.values = self.result.get('values', [])
@@ -82,7 +86,10 @@ class GoogleManager:
         """
         
         
-    # Range formatted 'Sheetname!Cell1:Cell2'    
+    """
+     Updates cells
+     Range format: '[Sheet]![cell1]:[cell2]'
+    """   
     def update_cell(self, cell_range, value):
         self.sheet.values().update(spreadsheetId=self.test_sheet_id, 
                                    range=cell_range, 
@@ -90,12 +97,14 @@ class GoogleManager:
                                    valueInputOption="USER_ENTERED").execute()
         print("{cell_range} updated")
     
+    
     def get_next_empty_row_manual_table(self):
         result = self.sheet.values().get(spreadsheetId=self.test_sheet_id,
                                          range=f'{self.curr_sheet}!G1:G100').execute()
         values = result.get('values', [])
         return len(values)+1
     
+    # inserts the data into the next manual row
     def insert_manual_data_into_row(self, date, time, measure, row):
         
         self.update_cell(f"{self.curr_sheet}!G{row}", str(date))
@@ -103,7 +112,7 @@ class GoogleManager:
         self.update_cell(f"{self.curr_sheet}!I{row}", measure)
         print(f'Next row: {row}')
         
-        # set to correct column
+        # Sets up the cell formatting
         reqs = {'requests': [
             {
                 "repeatCell": {
@@ -186,9 +195,11 @@ class GoogleManager:
                 }
             ]}
         
+        # updates sheet
         self.sheet.batchUpdate(spreadsheetId=self.test_sheet_id,
                                body=reqs).execute()
         
+    # tosses necessary formulas into results tble
     def insert_formula_into_results_table(self, row):
         self.update_cell(f'{self.curr_sheet}!A{row}', f'=G{row}')
         self.update_cell(f'{self.curr_sheet}!B{row}', f'=H{row}')
@@ -196,7 +207,9 @@ class GoogleManager:
         self.update_cell(f'{self.curr_sheet}!C{row}', f'=D{row}/305')
         self.update_cell(f'{self.curr_sheet}!D{row}', f'=I{row}')
         
+    # sends entry to sheet
     def submit_entry(self, date, time, measure):
+        # read the date values using dateutil parser
         date_val = parser.parse(date.get())
         time_val = parser.parse(time.get())
         measure_val = float(measure.get())
@@ -223,6 +236,7 @@ class GoogleManager:
         
         return dropdown, select_sheet_button
     
+    # changes current sheet
     def change_sheet_select(self, var):
         self.curr_sheet = self.get_well_by_name(var.get())
         print(self.curr_sheet)

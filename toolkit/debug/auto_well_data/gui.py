@@ -11,6 +11,7 @@ import sheets_manager
 
 ICON = 'logoicon.ico'
 
+# base class for a gui that others are based off of
 class GUI:
     def __init__(self, size="600x600", title="", icon=ICON):
         self.window_size = size
@@ -27,8 +28,8 @@ class GUI:
         self.labels = []
         self.buttons = []
     
-
-class MainMenu(GUI):
+# Our menu for to select excel or google sheets
+class WellDataMenu(GUI):
     def __init__(self, size="200x120", title="Well Data Manger", icon=ICON):
         super().__init__(size, title, icon)
         self.frame = LabelFrame(self.root, 
@@ -62,6 +63,7 @@ class MainMenu(GUI):
         sheets_gui.setup_frame()
         sheets_gui.root.mainloop()
         sheets_gui.root.quit()
+        
         
 
 class GoogleSheetsGUI(GUI):
@@ -209,6 +211,7 @@ class WellDataGUI(GUI):
         
         loaded_worksheet_label.pack()
         
+        # edit spacing
         data_entry_frame.grid_propagate(False)
         data_entry_frame.grid_columnconfigure(0, minsize=190)
         data_entry_frame.grid_columnconfigure(1, minsize=190)
@@ -219,6 +222,7 @@ class WellDataGUI(GUI):
         data_entry_frame.grid_rowconfigure(2, minsize=30)
         data_entry_frame.grid_rowconfigure(3, minsize=50)
         
+    # to display file path in the label
     def check_file_loaded(self):
         if (self.file_loaded):
             self.frames[1].pack()
@@ -228,6 +232,7 @@ class WellDataGUI(GUI):
     def update_file_path_label(self):
         pass
     
+    # cheap way to setup the dropdown menu
     def setup_dropdown(self, frame):
         var = StringVar(frame)
         var.set(self.sm.well_names[0])
@@ -255,7 +260,7 @@ def main():
     googleman = sheets_manager.GoogleManager()
     window.root.mainloop()
     """
-    menu = MainMenu()
+    menu = WellDataMenu()
     menu.root.mainloop()
     menu.root.quit()
     
