@@ -1,8 +1,5 @@
 """
- Manage the sheets' information
- including handling both old and new data,
- compiling data, and running the corrections on the
- depths. Afterward a new sheet will be generated
+ Manage google sheets and/or excel files of manual data
 """
 
 from __future__ import print_function
