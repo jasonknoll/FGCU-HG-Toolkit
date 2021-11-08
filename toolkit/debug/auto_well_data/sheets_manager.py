@@ -229,7 +229,7 @@ class GoogleManager:
         
         select_sheet_button = Button(frame, 
                                      command=lambda: self.change_sheet_select(var),
-                                     text="Select sheet")
+                                     text="New session")
         
         return dropdown, select_sheet_button
     
