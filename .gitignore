@@ -1,2 +1,4 @@
 toolkit\debug\auto_well_data\googlesheets\token.json
 *.bak
+*.bak
+.spyproject/config/backups/workspace.ini.bak
