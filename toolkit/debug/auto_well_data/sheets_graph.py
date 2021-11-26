@@ -18,28 +18,33 @@ class SheetsGrapher():
         
         # turn all sheets into dataframes
         # for now start with just 22M
+        self.columns = ["Date", "Time", "Elevation (ft)"]
+
         self.data_frames = []
 
-    def get_sheet_csv_url(self, wbid, sid):
-        return f"https://docs.google.com/spreadsheets/d/{wbid}/export?gid={sid}&format=csv"
+    def get_sheet_csv_url(self, key, sid):
+        return f"https://docs.google.com/spreadsheets/d/{key}/export?gid={sid}&format=csv"
+
+    def load_csv_from_file(self, path):
+        pass
 
 
-def main():
+def main(stdscr):
     grapher = SheetsGrapher(GoogleManager())
-    columns = ["Elevation (ft)"]
-    test_frame = pd.read_csv(
+    
+    sheet_name = "sheets/WellMeasurementsNewFormatUpdatedTest - 22M.csv"
+    """    test_frame = pd.read_csv(
         grapher.get_sheet_csv_url(grapher.gm.test_sheet_id, grapher.gm.sheet_ids[grapher.sheet_names[0]]),
-        skiprows=1,
-        usecols=columns)
-    grapher.data_frames.append(test_frame)
-    print(test_frame.head())
+        index_col=0)
     """
+    test_frame = pd.read_csv(sheet_name, skiprows=1, usecols=grapher.columns)
+    grapher.data_frames.append(test_frame)
+    #print(test_frame.head())
     stdscr.clear()
     stdscr.addstr(0,0,test_frame.head().to_string())
     stdscr.refresh()
     stdscr.getch()
-    """
 
 
-main()
-# wrapper(main)
+#main()
+wrapper(main)
