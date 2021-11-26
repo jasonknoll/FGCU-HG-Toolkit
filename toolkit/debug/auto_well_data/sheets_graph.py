@@ -18,12 +18,22 @@ class SheetsGrapher():
         
         # turn all sheets into dataframes
         # for now start with just 22M
+        self.data_frames = []
+
+    def get_sheet_csv_url(self, wbid, sid):
+        return f"https://docs.google.com/spreadsheets/d/{wbid}/export?gid={sid}&format=csv"
 
 
 def main(stdscr):
     grapher = SheetsGrapher(GoogleManager())
+    
+    test_frame = pd.read_csv(
+        grapher.get_sheet_csv_url(grapher.gm.test_sheet_id, grapher.gm.sheet_ids[grapher.sheet_names[0]]),
+        error_bad_lines=False)
+    grapher.data_frames.append(test_frame)
+    test_frame = test_frame.astype('string')
     stdscr.clear()
-    stdscr.addstr(0,0,"it works at least press enter to continue...")
+    stdscr.addstr(0,0,test_frame.head())
     stdscr.refresh()
     stdscr.getch()
 
