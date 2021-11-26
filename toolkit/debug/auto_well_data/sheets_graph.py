@@ -37,11 +37,11 @@ def main(stdscr):
         grapher.get_sheet_csv_url(grapher.gm.test_sheet_id, grapher.gm.sheet_ids[grapher.sheet_names[0]]),
         index_col=0)
     """
-    test_frame = pd.read_csv(sheet_name, skiprows=1, usecols=grapher.columns)
+    test_frame = pd.read_csv(sheet_name, skiprows=1, usecols=grapher.columns, parse_dates=[['Date', 'Time']])
     grapher.data_frames.append(test_frame)
     #print(test_frame.head())
     stdscr.clear()
-    stdscr.addstr(0,0,test_frame.head().to_string())
+    stdscr.addstr(0,0,test_frame.to_string())
     stdscr.refresh()
     stdscr.getch()
 
