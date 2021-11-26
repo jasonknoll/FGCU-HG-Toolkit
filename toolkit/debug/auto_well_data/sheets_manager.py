@@ -24,6 +24,7 @@ class GoogleManager:
         self.old_sheet_id = '1RCAEGJuKwnAstDoXLw9eoRIZoJZMe2ZKNsTFyehBaVo'
         self.test_sheet_id = '1u8uMAEu6FZPHEoKERau1R_emPtARuAPBbDWfZZvY6Ao'
         
+
         """
          Shows basic usage of the Sheets API.
          Connects to sheets
