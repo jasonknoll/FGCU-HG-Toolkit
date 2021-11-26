@@ -24,17 +24,22 @@ class SheetsGrapher():
         return f"https://docs.google.com/spreadsheets/d/{wbid}/export?gid={sid}&format=csv"
 
 
-def main(stdscr):
+def main():
     grapher = SheetsGrapher(GoogleManager())
-    
+    columns = ["Elevation (ft)"]
     test_frame = pd.read_csv(
         grapher.get_sheet_csv_url(grapher.gm.test_sheet_id, grapher.gm.sheet_ids[grapher.sheet_names[0]]),
-        error_bad_lines=False)
+        skiprows=1,
+        usecols=columns)
     grapher.data_frames.append(test_frame)
-    test_frame = test_frame.astype('string')
+    print(test_frame.head())
+    """
     stdscr.clear()
-    stdscr.addstr(0,0,test_frame.head())
+    stdscr.addstr(0,0,test_frame.head().to_string())
     stdscr.refresh()
     stdscr.getch()
+    """
 
-wrapper(main)
+
+main()
+# wrapper(main)
