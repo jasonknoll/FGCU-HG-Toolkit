@@ -39,6 +39,8 @@ def main(stdscr):
     """
     test_frame = pd.read_csv(sheet_name, skiprows=1, usecols=grapher.columns, parse_dates=[['Date', 'Time']])
     grapher.data_frames.append(test_frame)
+    test_frame.plot(kind='line',x='Date_Time',y='Elevation (ft)')
+    plt.show()
     #print(test_frame.head())
     stdscr.clear()
     stdscr.addstr(0,0,test_frame.to_string())
