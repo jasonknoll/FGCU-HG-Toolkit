@@ -46,6 +46,9 @@ class SheetsGrapher():
         for df in self.data_frames:
             df.plot(ax=ax, kind=chart,x='Date_Time',y='Elevation (ft)')
         ax.legend(self.frame_names)
+        ax.set_title('FGCU Hydrogeology Well Elevation (ft)')
+        ax.set_xlabel('Date_Time')
+        ax.set_ylabel('Elevation (ft)')
         plt.show()
         
 
