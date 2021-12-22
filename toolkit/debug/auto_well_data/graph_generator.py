@@ -6,6 +6,16 @@
  Generate graphs based off of user parameters
 """
 
+# kivy
+def show_gui():
+    pass 
+
+def connect_to_sheets(token):
+    pass
+
+def setup_dataframes(sheets):
+    pass
+
 def main():
     pass 
 
