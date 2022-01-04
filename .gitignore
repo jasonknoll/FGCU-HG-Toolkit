@@ -3,3 +3,4 @@ toolkit\debug\auto_well_data\googlesheets\token.json
 *.bak
 .spyproject/config/backups/workspace.ini.bak
 toolkit/debug/auto_well_data/googlesheets/token.json
+toolkit/debug/well_grapher/creds/credentials.json
