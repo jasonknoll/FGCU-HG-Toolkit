@@ -58,7 +58,7 @@ class GraphGenerator:
 
 
 """
- + Create a main menu window (maybe do a free float layout?)
+ Main menu window (maybe do a free float layout?)
 """
 class MainMenu(GridLayout):
     def __init__(self, *args, **kwargs):
@@ -83,13 +83,15 @@ class MainMenu(GridLayout):
 
 
 """
- + Create a graphing menu window
+ Graphing menu window
 """
 class GraphMenu(GridLayout):
     def __init__(self):
         pass
 
-
+"""
+ Main application object used by kivy to run the app
+"""
 class GraphApp(App):
     def build(self):
         Window.size = (640, 480)
