@@ -160,7 +160,7 @@ def main():
 
     goog = GoogleHandler()
     
-    # This needs to be completed when the user hits 'login'
+    # This needs to be completed when the user hits 'login' (i think)
     #creds = goog.connect_to_google(scopes)
     #service = goog.build_sheets_service(creds)
 
