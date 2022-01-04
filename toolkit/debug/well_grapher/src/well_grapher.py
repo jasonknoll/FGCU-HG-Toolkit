@@ -19,6 +19,7 @@ from kivy.app import App
 from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput 
 from kivy.uix.gridlayout import GridLayout
+from kivy.uix.button import Button
 
 
 """
@@ -36,10 +37,10 @@ class GraphGenerator:
 
 
 """
- + Create a main menu window
+ + Create a main menu window (maybe do a free float layout?)
 """
 class MainMenu(GridLayout):
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         super(MainMenu, self).__init__(*args, **kwargs)
 
         # check for credentials/token to determine this
@@ -50,8 +51,10 @@ class MainMenu(GridLayout):
         # Using kv language, update label
         self.add_widget(Label(text=f'Connected to Google Sheets: {str(self.loggedIn)}'))
 
-        # 
-        self.add_widget(Button(text='Login')))
+        # Maybe gray-out if logged in already?
+        self.add_widget(Button(text='Login'))
+
+
 
 """
  + Create a graphing menu window
@@ -61,8 +64,9 @@ class GraphMenu(GridLayout):
         pass
 
 
-def main():
-    pass
+class KivyApp(App):
+    def build(self):
+        return MainMenu()
 
 if __name__ == '__main__':
-    main()
+    KivyApp().run()
