@@ -40,8 +40,18 @@ class GraphGenerator:
 """
 class MainMenu(GridLayout):
     def __init__(self):
-        pass
+        super(MainMenu, self).__init__(*args, **kwargs)
 
+        # check for credentials/token to determine this
+        self.loggedIn = False
+
+        self.cols = 2
+        
+        # Using kv language, update label
+        self.add_widget(Label(text=f'Connected to Google Sheets: {str(self.loggedIn)}'))
+
+        # 
+        self.add_widget(Button(text='Login')))
 
 """
  + Create a graphing menu window
