@@ -11,6 +11,8 @@
     - Select colors (rgb?)
 
  + Generate graph with selected settings
+
+ + Figure out how to package
 """
 
 import kivy
