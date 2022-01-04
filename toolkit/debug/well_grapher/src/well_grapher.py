@@ -1,4 +1,11 @@
 """
+ FGCU Hydrogeology Well Data Graph Generator
+ Author: Jason Knoll
+ Version: 0.1.1
+"""
+
+
+"""
  In here, I need to:
  + Refactor well data entry folder
  + Create a main menu window 
@@ -27,6 +34,8 @@ from kivy.uix.checkbox import CheckBox
 from kivy.config import Config
 
 from kivy.core.window import Window
+
+import gspread
 
 Config.set('graphics', 'resizable', '0')
 Config.write()

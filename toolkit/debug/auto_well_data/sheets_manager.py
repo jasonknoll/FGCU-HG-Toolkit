@@ -54,13 +54,13 @@ class GoogleManager:
         self.sheet = self.service.spreadsheets()
         
         # manually setup sheet names and ids
-        self.well_names = ['22M', '3A', 'MA', 'MM', '5M', 
+        self.well_names = ['7A', '22M', '3A', 'MA', 'MM', '5M', 
                            '33M', 'U1', '27M', '6A', '28M', 
                            '29M', '11M', '10M', '7M', '1A', 
                            '9M', '12M', '30M', '5A', '32M', 
                            '31M', '18M', '2A', '21M']
         
-        self.sheet_ids = {'22M': 1433469438, '3A': 480038452, 'MA': 707076060,
+        self.sheet_ids = {'7A': 439837786, '22M': 1433469438, '3A': 480038452, 'MA': 707076060,
                           'MM':667590206, '5M': 898518076,'33M': 1686866287, 
                           'U1': 120162556, '27M': 960853423, '6A': 1309453391,
                           '28M': 2001958210,'29M': 1190619554, '11M': 2115651106,
