@@ -45,9 +45,11 @@ from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 
 
+# Prevent the window from being resized
 Config.set('graphics', 'resizable', '0')
 Config.write()
 
+# Green and red hex values for label text
 red_text_color = 'ff0000'
 green_text_color = '00ff00'
 
@@ -74,6 +76,8 @@ class MainMenu(GridLayout):
         super(MainMenu, self).__init__(*args, **kwargs)
 
         # check for credentials/token to determine this
+        # REMOVE THIS FROM CLASS POTENTIALLY
+        # SOME OF THESE VARIABLES NEEDS TO BE ACCESSED/EDITED OUTSIDE OF THIS CLASS
         self.logged_in = False
 
         self.cols = 1
@@ -88,6 +92,9 @@ class MainMenu(GridLayout):
 
         # On click, open the graphing menu
         self.add_widget(Button(text='Graph Menu'))
+
+    def set_login(self):
+        return not self.loggin_in
 
 
 
@@ -117,7 +124,7 @@ class GraphApp(App):
 class GoogleHandler:
     """
      Create credentials and give permission to access google api
-     @return credentials
+     @return creds
     """
     @staticmethod
     def connect_to_google(scopes):
@@ -154,9 +161,8 @@ def main():
     goog = GoogleHandler()
     
     # This needs to be completed when the user hits 'login'
-    # creds = goog.connect_to_google(scopes)
-
-    service = goog.build_sheets_service(creds)
+    #creds = goog.connect_to_google(scopes)
+    #service = goog.build_sheets_service(creds)
 
     GraphApp().run()
 
