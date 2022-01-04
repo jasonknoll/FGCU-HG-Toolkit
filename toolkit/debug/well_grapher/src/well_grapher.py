@@ -108,7 +108,12 @@ class GraphApp(App):
 """
 class GoogleHandler:
     def __init__(self):
-        pass
+        # for now this is hardcoded, sorry.
+        self.scopes = ['https://www.googleapis.com/auth/spreadsheets.readonly']
+        self.sheet_id = '1u8uMAEu6FZPHEoKERau1R_emPtARuAPBbDWfZZvY6Ao'
+
+        self.creds = None
+        #...
 
 if __name__ == '__main__':
     GraphApp().run()
