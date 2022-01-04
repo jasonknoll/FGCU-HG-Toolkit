@@ -4,8 +4,8 @@
  Version: 0.1.1
 """
 
-
 """
+ TODO List
  In here, I need to:
  + Refactor well data entry folder
  + Create a main menu window 
@@ -22,6 +22,8 @@
  + Figure out how to package
 """
 
+import os.path
+
 import kivy
 
 from kivy.app import App 
@@ -36,6 +38,12 @@ from kivy.config import Config
 from kivy.core.window import Window
 
 import gspread
+
+from googleapiclient.discovery import build
+from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
+from google.oauth2.credentials import Credentials
+
 
 Config.set('graphics', 'resizable', '0')
 Config.write()
@@ -107,13 +115,43 @@ class GraphApp(App):
  graph generator.
 """
 class GoogleHandler:
-    def __init__(self):
-        # for now this is hardcoded, sorry.
-        self.scopes = ['https://www.googleapis.com/auth/spreadsheets.readonly']
-        self.sheet_id = '1u8uMAEu6FZPHEoKERau1R_emPtARuAPBbDWfZZvY6Ao'
+    """
+     Create credentials and give permission to access google api
+     @return None
+    """
+    @staticmethod
+    def connect_to_google(scopes, creds):
+        if os.path.exists('googlesheets/token.json'):
+            creds = Credentials.from_authorized_user_file('googlesheets/token.json', scopes)
+        # If there are no (valid) credentials available, let the user log in.
+        if not creds or not creds.valid:
+            if creds and creds.expired and creds.refresh_token:
+                creds.refresh(Request())
+            else:
+                flow = InstalledAppFlow.from_client_secrets_file(
+                    '../creds/credentials.json', scopes)
+                creds = flow.run_local_server(port=0)
+            # Save the credentials for the next run
+            with open('../creds/token.json', 'w') as token:
+                token.write(creds.to_json())
 
-        self.creds = None
-        #...
+    """
+     Constructs the resource api necessary to access google sheets
+    """
+    @staticmethod
+    def build_sheets_service(creds):
+        return build('sheets', 'v4', credentials=creds).spreadsheets()
+
+
+def main():
+    scopes = ['https://www.googleapis.com/auth/spreadsheets.readonly']
+    sheet_id = '1u8uMAEu6FZPHEoKERau1R_emPtARuAPBbDWfZZvY6Ao'
+    creds = None
+
+    goog = GoogleHandler()
+    goog.connect_to_google(scopes, creds)
+    print("Google success")
+    GraphApp().run()
 
 if __name__ == '__main__':
-    GraphApp().run()
+    main()
