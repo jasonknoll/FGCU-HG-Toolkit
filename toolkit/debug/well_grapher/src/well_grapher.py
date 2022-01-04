@@ -20,7 +20,17 @@ from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput 
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
+from kivy.uix.checkbox import CheckBox
 
+from kivy.config import Config
+
+from kivy.core.window import Window
+
+Config.set('graphics', 'resizable', '0')
+Config.write()
+
+red_text_color = 'ff0000'
+green_text_color = '00ff00'
 
 """
  + GraphGenerator
@@ -44,15 +54,20 @@ class MainMenu(GridLayout):
         super(MainMenu, self).__init__(*args, **kwargs)
 
         # check for credentials/token to determine this
-        self.loggedIn = False
+        self.logged_in = False
 
-        self.cols = 2
+        self.cols = 1
+
+        self.logged_in_label = Label(text=f'Connected to Google Sheets: [color={red_text_color}]{str(self.logged_in)}[/color]', markup=True)
         
         # Using kv language, update label
-        self.add_widget(Label(text=f'Connected to Google Sheets: {str(self.loggedIn)}'))
+        self.add_widget(self.logged_in_label)
 
         # Maybe gray-out if logged in already?
         self.add_widget(Button(text='Login'))
+
+        # On click, open the graphing menu
+        self.add_widget(Button(text='Graphing'))
 
 
 
@@ -64,9 +79,11 @@ class GraphMenu(GridLayout):
         pass
 
 
-class KivyApp(App):
+class GraphApp(App):
     def build(self):
+        Window.size = (640, 480)
+        self.title = 'FGCU Hydrogeology Graph Generator'
         return MainMenu()
 
 if __name__ == '__main__':
-    KivyApp().run()
+    GraphApp().run()
