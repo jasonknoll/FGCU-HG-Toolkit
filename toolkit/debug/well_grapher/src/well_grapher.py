@@ -43,6 +43,7 @@ Config.write()
 red_text_color = 'ff0000'
 green_text_color = '00ff00'
 
+
 """
  + GraphGenerator
  The graph genertor object will take in which sheets and colors have been selected by the GUI
@@ -89,6 +90,7 @@ class GraphMenu(GridLayout):
     def __init__(self):
         pass
 
+
 """
  Main application object used by kivy to run the app
 """
@@ -97,6 +99,16 @@ class GraphApp(App):
         Window.size = (640, 480)
         self.title = 'FGCU Hydrogeology Graph Generator'
         return MainMenu()
+
+
+"""
+ The google handler object will handle all data involved with Google api
+ authentication and return the data for our sheets. The data will then be passed to the
+ graph generator.
+"""
+class GoogleHandler:
+    def __init__(self):
+        pass
 
 if __name__ == '__main__':
     GraphApp().run()
