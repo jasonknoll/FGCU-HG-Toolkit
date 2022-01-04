@@ -87,7 +87,7 @@ class MainMenu(GridLayout):
         self.add_widget(Button(text='Login'))
 
         # On click, open the graphing menu
-        self.add_widget(Button(text='Graphing'))
+        self.add_widget(Button(text='Graph Menu'))
 
 
 
@@ -117,12 +117,12 @@ class GraphApp(App):
 class GoogleHandler:
     """
      Create credentials and give permission to access google api
-     @return None
+     @return credentials
     """
     @staticmethod
-    def connect_to_google(scopes, creds):
-        if os.path.exists('googlesheets/token.json'):
-            creds = Credentials.from_authorized_user_file('googlesheets/token.json', scopes)
+    def connect_to_google(scopes):
+        if os.path.exists('../creds/token.json'):
+            creds = Credentials.from_authorized_user_file('../creds/token.json', scopes)
         # If there are no (valid) credentials available, let the user log in.
         if not creds or not creds.valid:
             if creds and creds.expired and creds.refresh_token:
@@ -135,8 +135,11 @@ class GoogleHandler:
             with open('../creds/token.json', 'w') as token:
                 token.write(creds.to_json())
 
+        return creds
+
     """
      Constructs the resource api necessary to access google sheets
+     @return google's api service for google sheets
     """
     @staticmethod
     def build_sheets_service(creds):
@@ -146,11 +149,15 @@ class GoogleHandler:
 def main():
     scopes = ['https://www.googleapis.com/auth/spreadsheets.readonly']
     sheet_id = '1u8uMAEu6FZPHEoKERau1R_emPtARuAPBbDWfZZvY6Ao'
-    creds = None
+    #creds = None
 
     goog = GoogleHandler()
-    goog.connect_to_google(scopes, creds)
-    print("Google success")
+    
+    # This needs to be completed when the user hits 'login'
+    # creds = goog.connect_to_google(scopes)
+
+    service = goog.build_sheets_service(creds)
+
     GraphApp().run()
 
 if __name__ == '__main__':
