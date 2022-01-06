@@ -118,13 +118,17 @@ class MainMenu(GridLayout):
         # check for credentials/token to determine this
         # REMOVE THIS FROM CLASS POTENTIALLY
         # SOME OF THESE VARIABLES NEEDS TO BE ACCESSED/EDITED OUTSIDE OF THIS CLASS
-        self.logged_in = False
+        self.logged_in = self.set_login()
+        if self.logged_in:
+            self.login_text_color = green_text_color
+        else:
+            self.login_text_color = red_text_color
 
         self.google = goog
 
         self.cols = 1
 
-        self.logged_in_label = Label(text=f'Connected to Google Sheets: [color={red_text_color}]{str(self.logged_in)}[/color]', markup=True)
+        self.logged_in_label = Label(text=f'Connected to Google Sheets: [color={self.login_text_color}]{str(self.logged_in)}[/color]', markup=True)
         
         # Using kv language, update label
         self.add_widget(self.logged_in_label)
@@ -138,9 +142,9 @@ class MainMenu(GridLayout):
         self.graph_menu_button = Button(text='Graph menu')
         self.add_widget(self.graph_menu_button)
 
-    # Probably not very useful
+    # Probably not very useful for setting the variable
     def set_login(self):
-        return not self.loggin_in
+        return os.path.exists('../creds/token.json')
 
     """
      Used by the button to actually login using the global scopes variable
