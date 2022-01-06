@@ -37,8 +37,6 @@ from kivy.config import Config
 
 from kivy.core.window import Window
 
-import gspread
-
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
@@ -88,10 +86,12 @@ class MainMenu(GridLayout):
         self.add_widget(self.logged_in_label)
 
         # Maybe gray-out if logged in already?
-        self.add_widget(Button(text='Login'))
+        self.login_button = Button(text='Login')
+        self.add_widget(self.login_button)
 
         # On click, open the graphing menu
-        self.add_widget(Button(text='Graph Menu'))
+        self.graph_menu_button = Button(text='Graph menu')
+        self.add_widget(self.graph_menu_button)
 
     def set_login(self):
         return not self.loggin_in
@@ -159,7 +159,10 @@ def main():
     #creds = None
 
     goog = GoogleHandler()
-    
+    """
+     Workflow: user hits login, if not logged in already, then the user will be able to hit
+     the graphing button which opens up the graphing menu. 
+    """
     # This needs to be completed when the user hits 'login' (i think)
     #creds = goog.connect_to_google(scopes)
     #service = goog.build_sheets_service(creds)
