@@ -1,7 +1,7 @@
 """
  FGCU Hydrogeology Well Data Graph Generator
  Author: Jason Knoll
- Version: 0.1.1
+ Version: 0.1.2
 """
 
 """
@@ -93,7 +93,6 @@ class GoogleHandler:
         return build('sheets', 'v4', credentials=creds).spreadsheets()
 
 
-
 """
  + GraphGenerator
  The graph genertor object will take in which sheets and colors have been selected by the GUI
@@ -119,10 +118,7 @@ class MainMenu(GridLayout):
         # REMOVE THIS FROM CLASS POTENTIALLY
         # SOME OF THESE VARIABLES NEEDS TO BE ACCESSED/EDITED OUTSIDE OF THIS CLASS
         self.logged_in = self.set_login()
-        if self.logged_in:
-            self.login_text_color = green_text_color
-        else:
-            self.login_text_color = red_text_color
+        self.login_text_color = self.set_login_text_color()
 
         self.google = goog
 
@@ -155,7 +151,12 @@ class MainMenu(GridLayout):
     def test_click(self, instance):
         print("ello govna")
 
-
+    # just changes from green to red
+    def set_login_text_color(self):
+        if self.logged_in:
+            return green_text_color
+        else:
+            return red_text_color
 
 
 """
@@ -176,8 +177,6 @@ class GraphApp(App):
         return MainMenu()
 
 
-
-
 def main():
     
     #creds = None
@@ -185,7 +184,8 @@ def main():
     #goog = GoogleHandler()
     """
      Workflow: user hits login, if not logged in already, then the user will be able to hit
-     the graphing button which opens up the graphing menu. 
+     the graphing button which opens up the graphing menu. Graphing menu reads sheets and determines
+     what can be graphed. The user makes their selection and generates a line graph based on the sheets.
     """
     # This needs to be completed when the user hits 'login' (i think)
     #creds = goog.connect_to_google(scopes)
