@@ -1,7 +1,7 @@
 """
  FGCU Hydrogeology Well Data Graph Generator
  Author: Jason Knoll
- Version: 0.1.2
+ Version: 0.1.3
 """
 
 """
@@ -37,6 +37,7 @@ from kivy.config import Config
 
 from kivy.core.window import Window
 
+# Google api imports 
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
@@ -124,6 +125,7 @@ class MainMenu(GridLayout):
 
         self.cols = 1
 
+        # TODO NEXT Figure out how to update this
         self.logged_in_label = Label(text=f'Connected to Google Sheets: [color={self.login_text_color}]{str(self.logged_in)}[/color]', markup=True)
         
         # Using kv language, update label
@@ -151,7 +153,10 @@ class MainMenu(GridLayout):
     def test_click(self, instance):
         print("ello govna")
 
-    # just changes from green to red
+    """
+     Just changes from green to red. Will have to be called again
+     if not logged in initially, and the label will need to be updated
+    """
     def set_login_text_color(self):
         if self.logged_in:
             return green_text_color
@@ -172,7 +177,7 @@ class GraphMenu(GridLayout):
 """
 class GraphApp(App):
     def build(self):
-        Window.size = (640, 480)
+        Window.size = (480, 480)
         self.title = 'FGCU Hydrogeology Graph Generator'
         return MainMenu()
 
