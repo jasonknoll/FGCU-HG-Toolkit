@@ -128,7 +128,8 @@ class GraphMenu(Screen):
  Have the label change from false to true when a token is detected.
  Change colors too
 
-
+class MainMenu(Screen):
+    def __init__(self)
 
 """
 class MainMenu(GridLayout):
@@ -190,6 +191,14 @@ class MainMenu(GridLayout):
 """
 class GraphApp(App):
     def build(self):
+        """
+         TODO somehow, add both the main and graphing menus to sm, and add all 
+         / necessary widgets. 
+
+
+        """
+        sm = ScreenManager()
+        sm.add_widget(GraphMenu(name='Graphing'))
         Window.size = (480, 480)
         self.title = 'FGCU Hydrogeology Graph Generator'
         return MainMenu()
