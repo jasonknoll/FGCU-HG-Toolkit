@@ -111,14 +111,25 @@ class GraphGenerator:
 
 """
  Graphing menu window
+
+ TODO Using kivy.builder, set this to another grid layout
 """
-class GraphMenu(GridLayout):
+class GraphMenu(Screen):
     def __init__(self):
         pass
 
 
 """
- Main menu window (maybe do a free float layout?)
+ Main menu window 
+
+ TODO using screen manager, set this to one screen with the graphing
+ / menu as another. Then using builder, add the necessary widgets.
+
+ Have the label change from false to true when a token is detected.
+ Change colors too
+
+
+
 """
 class MainMenu(GridLayout):
     def __init__(self, goog=GoogleHandler(), *args, **kwargs):
@@ -150,6 +161,7 @@ class MainMenu(GridLayout):
         self.add_widget(self.graph_menu_button)
 
     # Probably not very useful for setting the variable
+    # @return Bool: token.json exists
     def set_login(self):
         return os.path.exists('../creds/token.json')
 
@@ -171,10 +183,6 @@ class MainMenu(GridLayout):
             return green_text_color
         else:
             return red_text_color
-
-    def set_graphing_menu(self):
-        return GraphMenu()
-
 
 
 """
