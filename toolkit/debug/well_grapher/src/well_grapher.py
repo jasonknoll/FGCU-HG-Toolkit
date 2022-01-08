@@ -32,6 +32,7 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
 from kivy.uix.checkbox import CheckBox
+from kivy.uix.screenmanager import ScreenManager, Screen
 
 from kivy.config import Config
 
@@ -109,6 +110,14 @@ class GraphGenerator:
 
 
 """
+ Graphing menu window
+"""
+class GraphMenu(GridLayout):
+    def __init__(self):
+        pass
+
+
+"""
  Main menu window (maybe do a free float layout?)
 """
 class MainMenu(GridLayout):
@@ -163,13 +172,9 @@ class MainMenu(GridLayout):
         else:
             return red_text_color
 
+    def set_graphing_menu(self):
+        return GraphMenu()
 
-"""
- Graphing menu window
-"""
-class GraphMenu(GridLayout):
-    def __init__(self):
-        pass
 
 
 """
