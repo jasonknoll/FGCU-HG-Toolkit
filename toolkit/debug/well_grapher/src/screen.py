@@ -102,8 +102,13 @@ class GoogleHandler:
  allow for easier working with matplotlib.
 """
 class GraphGenerator:
-    def __init__(self):
-        pass
+    def __init__(self, serv):
+        """
+         Init google api service
+         This allows the graph generator object to 
+        """
+        self.service = serv
+        self.sheet = service.spreadsheets()
     
     def generate(self):
         pass
@@ -131,7 +136,7 @@ class GraphMenu(Screen):
 # Figure out how to set this up as a screen! 
 class MainMenu(Screen):
 """
-class MainMenu(GridLayout):
+class MainMenu(Screen):
     def __init__(self, goog=GoogleHandler(), *args, **kwargs):
         super(MainMenu, self).__init__(*args, **kwargs)
 
@@ -171,9 +176,6 @@ class MainMenu(GridLayout):
     def login(self, instance):
         self.google.connect_to_google(g_scopes)
 
-    def test_click(self, instance):
-        print("ello govna")
-
     """
      Just changes from green to red. Will have to be called again
      if not logged in initially, and the label will need to be updated
@@ -184,6 +186,12 @@ class MainMenu(GridLayout):
         else:
             return red_text_color
 
+    """
+     May need to be called when the user clicks the
+     graphing button
+    """
+    def switch_to_graphing(self):
+        pass
 
 """
  Main application object used by kivy to run the app
@@ -193,30 +201,17 @@ class GraphApp(App):
         """
          TODO somehow, add both the main and graphing menus to sm, and add all 
          / necessary widgets. 
-
-
         """
+
         sm = ScreenManager()
-        sm.add_widget(GraphMenu(name='Graphing'))
+        sm.add_widget(MainMenu(name='Main Menu'))
+        sm.add_widget(GraphMenu(name='Graph Menu'))
         Window.size = (480, 480)
         self.title = 'FGCU Hydrogeology Graph Generator'
         return MainMenu()
 
 
 def main():
-    
-    #creds = None
-
-    #goog = GoogleHandler()
-    """
-     Workflow: user hits login, if not logged in already, then the user will be able to hit
-     the graphing button which opens up the graphing menu. Graphing menu reads sheets and determines
-     what can be graphed. The user makes their selection and generates a line graph based on the sheets.
-    """
-    # This needs to be completed when the user hits 'login' (i think)
-    #creds = goog.connect_to_google(scopes)
-    #service = goog.build_sheets_service(creds)
-
     GraphApp().run()
 
 if __name__ == '__main__':
