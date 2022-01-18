@@ -64,6 +64,9 @@ sheet_id = '1u8uMAEu6FZPHEoKERau1R_emPtARuAPBbDWfZZvY6Ao'
 """
 Builder.load_string("""
     <MainMenu>
+    GridLayout: 
+        cols: 1    
+
 """)
 
 
