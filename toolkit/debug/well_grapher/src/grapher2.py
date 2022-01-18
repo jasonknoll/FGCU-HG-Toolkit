@@ -60,6 +60,14 @@ sheet_id = '1u8uMAEu6FZPHEoKERau1R_emPtARuAPBbDWfZZvY6Ao'
 
 
 """
+ Builder allows me to add buttons and features using the Kivy languaged
+"""
+Builder.load_string("""
+    <MainMenu>
+""")
+
+
+"""
  The google handler object will handle all data involved with Google api
  authentication and return the data for our sheets. The data will then be passed to the
  graph generator.
