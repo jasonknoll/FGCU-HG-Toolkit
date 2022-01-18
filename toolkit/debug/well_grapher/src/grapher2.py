@@ -1,7 +1,7 @@
 """
  FGCU Hydrogeology Well Data Graph Generator
  Author: Jason Knoll
- Version: 0.1.4
+ Version: 0.1.5
 """
 
 """
@@ -35,7 +35,7 @@ from kivy.uix.checkbox import CheckBox
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.widget import Widget
 
-from kivy.builder import Builder
+from kivy.lang.builder import Builder
 
 from kivy.config import Config
 
@@ -64,21 +64,25 @@ sheet_id = '1u8uMAEu6FZPHEoKERau1R_emPtARuAPBbDWfZZvY6Ao'
  Builder allows me to add buttons and features using the Kivy languaged
 """
 Builder.load_string("""
-    <MainMenu>
-    GridLayout: 
-        cols: 1    
-        Label:
-            id: login_label 
-            text: ""
+<MainMenu>
+    Screen:
+        GridLayout:
+            cols: 1    
+            Label:
+                id: test_login_label 
+                text: ""
+                markup: True
 
-        Button:
-            id: login_button
-            text: "Login"
-            on_press: root.login()
+            Button:
+                id: test_login_button
+                text: "Login"
+                on_press: root.login()
 
-        Button:
-            id: graph_menu_button
-            text: "Graphing"
+            Button:
+                id: test_graph_menu_button
+                text: "Graphing"
+
+<GraphMenu>
 """)
 
 
@@ -178,17 +182,19 @@ class MainMenu(Screen):
         # TODO NEXT Figure out how to update this
         self.logged_in_label = Label(text=f'Connected to Google Sheets: [color={self.login_text_color}]{str(self.logged_in)}[/color]', markup=True)
         
+        self.ids.test_login_label.text = f"Login status: [color={self.login_text_color}]{str(self.logged_in)}[/color]"
+
         # Using kv language, update label
-        self.add_widget(self.logged_in_label)
+        #self.add_widget(self.ids.test_login_label)
 
         # Maybe force the user to do this every time
         self.login_button = Button(text='Login')
         self.login_button.bind(on_press=self.login)
-        self.add_widget(self.login_button)
+        #self.add_widget(self.ids.test_login_button)
 
         # On click, open the graphing menu
         self.graph_menu_button = Button(text='Graph menu')
-        self.add_widget(self.graph_menu_button)
+        #self.add_widget(self.ids.test_graph_menu_button)
 
     # Probably not very useful for setting the variable
     # @return Bool: token.json exists
@@ -198,7 +204,7 @@ class MainMenu(Screen):
     """
      Used by the button to actually login using the global scopes variable
     """
-    def login(self, instance):
+    def login(self):
         self.google.connect_to_google(g_scopes)
 
     """
@@ -229,8 +235,8 @@ class GraphApp(App):
         """
 
         sm = ScreenManager()
-        sm.add_widget(MainMenu(name='Main Menu'))
-        sm.add_widget(GraphMenu(name='Graph Menu'))
+        sm.add_widget(MainMenu())
+        sm.add_widget(GraphMenu())
         Window.size = (480, 480)
         self.title = 'FGCU Hydrogeology Graph Generator'
         return MainMenu()
