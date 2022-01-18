@@ -67,7 +67,14 @@ Builder.load_string("""
     <MainMenu>
     GridLayout: 
         cols: 1    
+        Label: 
+            text: ""
 
+        Button:
+            text: "Login"
+
+        Button:
+            text: "Graphing"
 """)
 
 
