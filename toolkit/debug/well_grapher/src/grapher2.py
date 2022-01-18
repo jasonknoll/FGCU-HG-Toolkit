@@ -67,13 +67,17 @@ Builder.load_string("""
     <MainMenu>
     GridLayout: 
         cols: 1    
-        Label: 
+        Label:
+            id: login_label 
             text: ""
 
         Button:
+            id: login_button
             text: "Login"
+            on_press: root.login()
 
         Button:
+            id: graph_menu_button
             text: "Graphing"
 """)
 
