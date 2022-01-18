@@ -34,6 +34,8 @@ from kivy.uix.button import Button
 from kivy.uix.checkbox import CheckBox
 from kivy.uix.screenmanager import ScreenManager, Screen
 
+from kivy.builder import Builder
+
 from kivy.config import Config
 
 from kivy.core.window import Window
