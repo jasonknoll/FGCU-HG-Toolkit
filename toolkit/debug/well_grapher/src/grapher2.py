@@ -35,7 +35,7 @@ from kivy.uix.checkbox import CheckBox
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.widget import Widget
 
-from kivy.lang.builder import Builder
+from kivy.lang import Builder
 
 from kivy.config import Config
 
@@ -64,7 +64,7 @@ sheet_id = '1u8uMAEu6FZPHEoKERau1R_emPtARuAPBbDWfZZvY6Ao'
  Builder allows me to add buttons and features using the Kivy languaged
 """
 Builder.load_string("""
-<MainMenu>
+<MainMenu>:
     Screen:
         GridLayout:
             cols: 1    
@@ -81,8 +81,15 @@ Builder.load_string("""
             Button:
                 id: test_graph_menu_button
                 text: "Graphing"
+                on_press: 
+                    root.sm.current = 'graph'
 
-<GraphMenu>
+<GraphMenu>:
+    Screen:
+        GridLayout:
+            cols: 1
+            Label:
+                text: "Test text"
 """)
 
 
@@ -149,9 +156,8 @@ class GraphGenerator:
  TODO Using kivy.builder, set this to another grid layout
 """
 class GraphMenu(Screen):
-    def __init__(self):
-        pass
-
+    def __init__(self, *args, **kwargs):
+       super(GraphMenu, self).__init__(*args, **kwargs)
 
 """
  Main menu window 
@@ -166,7 +172,7 @@ class GraphMenu(Screen):
 class MainMenu(Screen):
 """
 class MainMenu(Screen):
-    def __init__(self, goog=GoogleHandler(), *args, **kwargs):
+    def __init__(self, sm, goog=GoogleHandler(), *args, **kwargs):
         super(MainMenu, self).__init__(*args, **kwargs)
 
         # check for credentials/token to determine this
@@ -178,6 +184,9 @@ class MainMenu(Screen):
         self.google = goog
 
         self.cols = 1
+        
+        # Screen manager needed to feed to kivy design
+        self.sm = sm
 
         # TODO NEXT Figure out how to update this
         self.logged_in_label = Label(text=f'Connected to Google Sheets: [color={self.login_text_color}]{str(self.logged_in)}[/color]', markup=True)
@@ -235,11 +244,11 @@ class GraphApp(App):
         """
 
         sm = ScreenManager()
-        sm.add_widget(MainMenu())
-        sm.add_widget(GraphMenu())
+        sm.add_widget(MainMenu(sm, name='main'))
+        sm.add_widget(GraphMenu(name='graph'))
         Window.size = (480, 480)
         self.title = 'FGCU Hydrogeology Graph Generator'
-        return MainMenu()
+        return sm
 
 
 def main():
