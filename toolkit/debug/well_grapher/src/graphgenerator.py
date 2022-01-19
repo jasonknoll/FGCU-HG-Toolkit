@@ -129,7 +129,7 @@ class GraphGenerator:
 
         self.goog = GoogleHandler()
 
-        self.sheet = self.goog.build_sheets_service(self.goog.connect_to_google(g_scopes)) 
+        self.sheet = None
 
         self.wells = []
 
@@ -197,6 +197,7 @@ class GraphGenerator:
         self.wells = wells
 
     def test_sheets_values(self):
+        self.sheet = self.goog.build_sheets_service(self.goog.connect_to_google(g_scopes))
         data, wells = self.get_sheet_values()
         #print(data[0].head())
         #print(data[0].dtypes)
@@ -244,7 +245,6 @@ class GraphMenu(Screen):
     def test_check_box(self, cb, value):
         if value:
             print("checkbox checked")
-            print(f"{self.ids.sevenA == cb}")
         else:
             print("unchecked")
 
@@ -318,6 +318,7 @@ class MainMenu(Screen):
      Used by the button to actually login using the global scopes variable
     """
     def login(self):
+        print("login called")
         self.google.connect_to_google(g_scopes)
         self.logged_in = self.set_login()
         self.set_login_text_color()
