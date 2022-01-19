@@ -135,8 +135,6 @@ class GraphGenerator:
 
 """
  Graphing menu window
-
- TODO Using kivy.builder, set this to another grid layout
 """
 class GraphMenu(Screen):
     def __init__(self, *args, **kwargs):
