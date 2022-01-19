@@ -1,7 +1,7 @@
 """
  FGCU Hydrogeology Well Data Graph Generator
  Author: Jason knoll
- version: 0.1.9
+ version: 0.1.11
 """
 
 """
@@ -46,6 +46,10 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
+
+# Data vizualization imports
+import pandas as pd
+import numpy as np 
 
 
 # Prevent the window from being resized
@@ -151,13 +155,15 @@ class GraphMenu(Screen):
         self.wells.append(well)
 
     def rm_well_from_graphing(self, well):
-        self.well.append(well)
+        self.wells.remove(well)
 
     def test_check_box(self, cb, value):
         if value:
             print("checkbox checked")
         else:
             print("unchecked")
+
+
 """
  Main menu window 
 
@@ -239,6 +245,7 @@ class MainMenu(Screen):
     """
     def switch_to_graphing(self):
         pass
+
 
 """
  Main application object used by kivy to run the app
