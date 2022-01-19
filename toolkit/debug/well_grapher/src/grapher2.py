@@ -92,6 +92,8 @@ Builder.load_string("""
             cols: 1
             Label:
                 text: "Test text"
+            CheckBox:
+                id: sevenA
 """)
 
 
@@ -105,6 +107,7 @@ class GoogleHandler:
      Create credentials and give permission to access google api
      @return creds
     """
+
     @staticmethod
     def connect_to_google(scopes):
         creds = ""
@@ -130,7 +133,10 @@ class GoogleHandler:
     """
     @staticmethod
     def build_sheets_service(creds):
-        return build('sheets', 'v4', credentials=creds).spreadsheets()
+        try:
+            return build('sheets', 'v4', credentials=creds).spreadsheets()
+        except HttpError as err:
+            print(err)
 
 
 """
@@ -140,14 +146,16 @@ class GoogleHandler:
  allow for easier working with matplotlib.
 """
 class GraphGenerator:
-    def __init__(self, serv):
+    def __init__(self):
         """
          Init google api service
          This allows the graph generator object to 
         """
-        self.service = serv
-        self.sheet = service.spreadsheets()
-    
+
+        self.goog = GoogleHandler()
+
+        self.sheet = self.goog.build_sheets_service(self.goog.connect_to_google(g_scopes)) 
+   
     def generate(self):
         pass
 
@@ -159,8 +167,18 @@ class GraphGenerator:
 """
 class GraphMenu(Screen):
     def __init__(self, *args, **kwargs):
-       super(GraphMenu, self).__init__(*args, **kwargs)
+        super(GraphMenu, self).__init__(*args, **kwargs)
 
+        self.gen = GraphGenerator()
+
+        self.ids.sevenA.bind(active=self.test_check_box)
+
+
+    def test_check_box(self, cb, value):
+        if value:
+            print("checkbox checked")
+        else:
+            print("unchecked")
 """
  Main menu window 
 
