@@ -1,7 +1,7 @@
 """
  FGCU Hydrogeology Well Data Graph Generator
  Author: Jason knoll
- version: 0.1.11
+ version: 0.1.12
 """
 
 """
@@ -133,12 +133,16 @@ class GraphGenerator:
 
         self.wells = []
 
-        self.frames = []
-
         self.all_wells = {}
    
     def generate(self, dfs):
-        pass
+        ax = dfs[0].plot(kind='line',x="Date", y="Elevation (ft)")
+        for d in dfs[1:]:
+            d.plot(kind='line',x="Date", y="Elevation (ft)", ax=ax)
+
+        ax.ylabel='Elevation (ft)'
+        
+        plt.show()
 
     def get_last_row(self, well):
         rows = self.sheet.values().get(spreadsheetId=sheet_id,
@@ -164,8 +168,14 @@ class GraphGenerator:
                 rows = self.sheet.values().get(
                                         spreadsheetId=sheet_id,
                                         range=f"{v}!A2:E{self.get_last_row(v)}").execute()
+
                 data = rows.get('values')
+
                 df = pd.DataFrame(data[1:], columns=data[0])
+                df.drop(df.index[df['Elevation (ft)'] == "#VALUE!"], inplace=True)
+                df['Date'] = pd.to_datetime(df['Date'], format='%m/%d/%Y')
+                df['Elevation (ft)'] = df['Elevation (ft)'].astype(float)
+
                 print(f"Created df {v}")
                 dfs.append(df)
 
@@ -176,7 +186,9 @@ class GraphGenerator:
 
     def test_sheets_values(self):
         data = self.get_sheet_values()
-        print(data[0].head())
+        #print(data[0].head())
+        #print(data[0].dtypes)
+        self.generate(data)
 
 """
  Graphing menu window
