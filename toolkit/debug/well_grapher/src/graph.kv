@@ -41,16 +41,16 @@
                     text: "22M"
 
                 CheckBox:
-                    id: threeM
+                    id: threeA
                 Label:
-                    id: threeM_label
-                    text: "3M"
+                    id: threeA_label
+                    text: "3A"
 
                 CheckBox:
                     id: MM
                 Label:
                     id: MM_label
-                    text: "7A"
+                    text: "MM"
 
                 CheckBox:
                     id: fiveM
@@ -171,3 +171,9 @@
                 Label:
                     id: twentyOneM_label
                     text: "21M"
+
+            GridLayout:
+                cols: 1
+                Button: 
+                    text: "Generate graph"
+                    on_press: root.gen.test_sheets_values()

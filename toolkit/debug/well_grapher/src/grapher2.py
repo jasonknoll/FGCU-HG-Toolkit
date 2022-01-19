@@ -22,6 +22,8 @@
  + Figure out how to package
 """
 
+import time
+
 import os.path
 
 import kivy
@@ -128,10 +130,53 @@ class GraphGenerator:
         self.goog = GoogleHandler()
 
         self.sheet = self.goog.build_sheets_service(self.goog.connect_to_google(g_scopes)) 
+
+        self.wells = []
+
+        self.frames = []
+
+        self.all_wells = {}
    
-    def generate(self):
+    def generate(self, dfs):
         pass
 
+    def get_last_row(self, well):
+        rows = self.sheet.values().get(spreadsheetId=sheet_id,
+                                range=f"{well}!A1:100").execute()
+        data = rows.get('values')
+    
+        return len(data)+1
+
+    """
+     Create dataframes from the selected sheets.
+     If no sheets are selected, all sheets are
+    """
+    def get_sheet_values(self):
+
+        dfs = []
+
+        if self.wells:
+            for w in self.wells:
+                pass
+        else:
+            # do every well
+            for k,v in self.all_wells.items():
+                rows = self.sheet.values().get(
+                                        spreadsheetId=sheet_id,
+                                        range=f"{v}!A2:E{self.get_last_row(v)}").execute()
+                data = rows.get('values')
+                df = pd.DataFrame(data[1:], columns=data[0])
+                print(f"Created df {v}")
+                dfs.append(df)
+
+            return dfs
+
+    def set_wells(self, wells):
+        self.wells = wells
+
+    def test_sheets_values(self):
+        data = self.get_sheet_values()
+        print(data[0].head())
 
 """
  Graphing menu window
@@ -141,6 +186,23 @@ class GraphMenu(Screen):
         super(GraphMenu, self).__init__(*args, **kwargs)
 
         self.gen = GraphGenerator()
+
+        """
+         A fully-functioning product should grab these automatically.
+         Here I'm hardcoding it
+        """
+        self.all_wells = {
+            "sevenA":"7A", "twentyTwoM":"22M", "threeA":"3A",
+            "MM":"MM", "fiveM":"5M", "thirtyThreeM":"33M", 
+            "U1":"U1", "twentySevenM":"27M", "sixA":"6A",
+            "twentyEightM":"28M", "elevenM":"11M", "tenM":"10M",
+            "sevenM":"7M", "oneA":"1A", "nineM":"9M",
+            "twelveM":"12M", "thirtyM":"30M", "fiveA":"5A",
+            "thirtyTwoM":"32M", "thirtyOneM":"31M", "eighteenM":"18M",
+            "twoA":"2A", "twentyOneM":"21M"
+        }
+
+        self.gen.all_wells = self.all_wells
 
         self.ids.sevenA.bind(active=self.test_check_box)
 
@@ -158,8 +220,22 @@ class GraphMenu(Screen):
     def test_check_box(self, cb, value):
         if value:
             print("checkbox checked")
+            print(f"{self.ids.sevenA == cb}")
         else:
             print("unchecked")
+
+    def add_checkbox_well(self, cb, value):
+        pass
+
+
+    def setup_checkbox_functions(self):
+        pass
+    
+    """
+     Acts as a wrapper to send data to generator
+    """
+    def send_wells_to_gen(self):
+        self.gen.set_wells(self.wells_to_graph)
 
 
 """
