@@ -146,7 +146,7 @@ class MainMenu(GridLayout):
         self.cols = 1
 
         # TODO NEXT Figure out how to update this
-        self.logged_in_label = Label(text=f'Connected to Google Sheets: [color={self.login_text_color}]{str(self.logged_in)}[/color]', markup=True)
+        #self.logged_in_label = Label(text=f'Connected to Google Sheets: [color={self.login_text_color}]{str(self.logged_in)}[/color]', markup=True)
         
         # Using kv language, update label
         self.add_widget(self.logged_in_label)

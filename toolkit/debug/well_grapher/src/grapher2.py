@@ -76,7 +76,9 @@ Builder.load_string("""
             Button:
                 id: test_login_button
                 text: "Login"
-                on_press: root.login()
+                on_press: 
+                    root.login()
+
 
             Button:
                 id: test_graph_menu_button
@@ -208,6 +210,7 @@ class MainMenu(Screen):
     # Probably not very useful for setting the variable
     # @return Bool: token.json exists
     def set_login(self):
+        print(f"{str(os.path.exists('../creds/token.json'))}")
         return os.path.exists('../creds/token.json')
 
     """
@@ -215,16 +218,25 @@ class MainMenu(Screen):
     """
     def login(self):
         self.google.connect_to_google(g_scopes)
+        self.logged_in = self.set_login()
+        self.set_login_text_color()
 
     """
      Just changes from green to red. Will have to be called again
      if not logged in initially, and the label will need to be updated
     """
     def set_login_text_color(self):
+
         if self.logged_in:
-            return green_text_color
+            self.set_login_text(green_text_color)
+            print("pl")
+            return  green_text_color
         else:
+            self.set_login_text(red_text_color)
             return red_text_color
+
+    def set_login_text(self, color):
+        self.ids.test_login_label.text = f"Login status: [color={color}]{str(self.logged_in)}[/color]"
 
     """
      May need to be called when the user clicks the
@@ -244,6 +256,9 @@ class GraphApp(App):
         """
 
         sm = ScreenManager()
+
+        main_menu = MainMenu(sm, name='')
+
         sm.add_widget(MainMenu(sm, name='main'))
         sm.add_widget(GraphMenu(name='graph'))
         Window.size = (480, 480)
