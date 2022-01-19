@@ -1,7 +1,7 @@
 """
  FGCU Hydrogeology Well Data Graph Generator
  Author: Jason knoll
- version: 0.1.6
+ version: 0.1.9
 """
 
 """
@@ -88,12 +88,15 @@ Builder.load_string("""
 
 <GraphMenu>:
     Screen:
-        GridLayout:
+        GridLayout: 
             cols: 1
             Label:
-                text: "Test text"
-            CheckBox:
-                id: sevenA
+                text: "Select sheets to graph"
+            GridLayout:
+                cols: 3
+                CheckBox:
+                    id: sevenA
+                    text: "7A"
 """)
 
 
@@ -173,6 +176,16 @@ class GraphMenu(Screen):
 
         self.ids.sevenA.bind(active=self.test_check_box)
 
+        self.wells_to_graph = []
+
+    """
+     These functions add and remove the wells to graph based on the checkboxes
+    """
+    def add_well_to_graphing(self, well):
+        self.wells.append(well)
+
+    def rm_well_from_graphing(self, well):
+        self.well.append(well)
 
     def test_check_box(self, cb, value):
         if value:
