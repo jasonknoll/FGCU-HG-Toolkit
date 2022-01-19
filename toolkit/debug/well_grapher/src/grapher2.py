@@ -1,7 +1,7 @@
 """
  FGCU Hydrogeology Well Data Graph Generator
- Author: Jason Knoll
- Version: 0.1.5
+ Author: Jason knoll
+ version: 0.1.6
 """
 
 """
