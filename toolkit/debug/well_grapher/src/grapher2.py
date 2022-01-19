@@ -63,41 +63,7 @@ sheet_id = '1u8uMAEu6FZPHEoKERau1R_emPtARuAPBbDWfZZvY6Ao'
 """
  Builder allows me to add buttons and features using the Kivy languaged
 """
-Builder.load_string("""
-<MainMenu>:
-    Screen:
-        GridLayout:
-            cols: 1    
-            Label:
-                id: test_login_label 
-                text: ""
-                markup: True
-
-            Button:
-                id: test_login_button
-                text: "Login"
-                on_press: 
-                    root.login()
-
-
-            Button:
-                id: test_graph_menu_button
-                text: "Graphing"
-                on_press: 
-                    root.sm.current = 'graph'
-
-<GraphMenu>:
-    Screen:
-        GridLayout: 
-            cols: 1
-            Label:
-                text: "Select sheets to graph"
-            GridLayout:
-                cols: 3
-                CheckBox:
-                    id: sevenA
-                    text: "7A"
-""")
+Builder.load_file("graph.kv")
 
 
 """
@@ -257,10 +223,8 @@ class MainMenu(Screen):
      if not logged in initially, and the label will need to be updated
     """
     def set_login_text_color(self):
-
         if self.logged_in:
             self.set_login_text(green_text_color)
-            print("pl")
             return  green_text_color
         else:
             self.set_login_text(red_text_color)

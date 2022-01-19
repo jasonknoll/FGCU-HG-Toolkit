@@ -1,0 +1,144 @@
+<MainMenu>:
+    Screen:
+        GridLayout:
+            cols: 1    
+            Label:
+                id: test_login_label 
+                text: ""
+                markup: True
+
+            Button:
+                id: test_login_button
+                text: "Login"
+                on_press: 
+                    root.login()
+
+
+            Button:
+                id: test_graph_menu_button
+                text: "Graphing"
+                on_press: 
+                    root.sm.current = 'graph'
+
+<GraphMenu>:
+    Screen:
+        GridLayout: 
+            cols: 1
+            Label:
+                text: "Select sheets to graph"
+            GridLayout:
+                cols: 6
+                CheckBox:
+                    id: sevenA
+                Label:
+                    text: "7A"
+
+                CheckBox:
+                    id: twentyTwoM
+                Label:
+                    text: "22M"
+
+                CheckBox:
+                    id: threeM
+                Label:
+                    text: "3M"
+
+                CheckBox:
+                    id: MM
+                Label:
+                    text: "7A"
+
+                CheckBox:
+                    id: fiveM
+                Label:
+                    text: "5M"
+
+                CheckBox:
+                    id: thirtyThreeM
+                Label:
+                    text: "33M"
+                
+                CheckBox:
+                    id: u1
+                Label:
+                    text: "U1"
+
+                CheckBox:
+                    id: twentySevenM
+                Label:
+                    text: "27M"
+
+                CheckBox:
+                    id: sixA
+                Label:
+                    text: "6A"
+
+                CheckBox:
+                    id: twentyEightM
+                Label:
+                    text: "28A"
+
+                CheckBox:
+                    id: twentyNineM
+                Label:
+                    text: "29M"
+
+                CheckBox:
+                    id: elevenM
+                Label:
+                    text: "11M"   
+
+                CheckBox:
+                    id: tenM
+                Label:
+                    text: "10M"
+
+                CheckBox:
+                    id: sevenM
+                Label:
+                    text: "7M"             
+
+                CheckBox:
+                    id: oneA
+                Label:
+                    text: "1A"
+
+                CheckBox:
+                    id: nineM
+                Label:
+                    text: "9M"
+
+                CheckBox:
+                    id: twelveM
+                Label:
+                    text: "12M"
+
+                CheckBox:
+                    id: thirtyM
+                Label:
+                    text: "30M"
+
+                CheckBox:
+                    id: fiveA
+                Label:
+                    text: "5A"
+
+                CheckBox:
+                    id: thirtyTwoM
+                Label:
+                    text: "32M"
+
+                CheckBox:
+                    id: thirtyOneM
+                Label:
+                    text: "31M"
+
+                CheckBox:
+                    id: eighteenM
+                Label:
+                    text: "18M"
+
+                CheckBox:
+                    id: twoA
+                Label:
+                    text: "2A"
