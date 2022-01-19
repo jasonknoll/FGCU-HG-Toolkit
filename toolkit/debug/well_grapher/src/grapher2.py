@@ -52,7 +52,7 @@ from google.oauth2.credentials import Credentials
 # Data vizualization imports
 import pandas as pd
 import numpy as np 
-
+import matplotlib.pyplot as plt
 
 # Prevent the window from being resized
 Config.set('graphics', 'resizable', '0')
@@ -134,19 +134,29 @@ class GraphGenerator:
         self.wells = []
 
         self.all_wells = {}
-   
-    def generate(self, dfs):
+    
+    """
+     Generate the data using the legend of wells and dfs passed
+    """
+    def generate(self, dfs, wells):
         ax = dfs[0].plot(kind='line',x="Date", y="Elevation (ft)")
         for d in dfs[1:]:
             d.plot(kind='line',x="Date", y="Elevation (ft)", ax=ax)
 
-        ax.ylabel='Elevation (ft)'
+        ax.set_ylabel('Elevation (ft)')
         
+        ax.set_title('FGCU Hydrogeology Well Elevation')
+
+        ax.legend(wells)
+
         plt.show()
 
+    """
+     Find the last row in the sheet
+    """
     def get_last_row(self, well):
         rows = self.sheet.values().get(spreadsheetId=sheet_id,
-                                range=f"{well}!A1:100").execute()
+                                range=f"{well}!A1:200").execute()
         data = rows.get('values')
     
         return len(data)+1
@@ -158,6 +168,7 @@ class GraphGenerator:
     def get_sheet_values(self):
 
         dfs = []
+        ws = []
 
         if self.wells:
             for w in self.wells:
@@ -178,17 +189,18 @@ class GraphGenerator:
 
                 print(f"Created df {v}")
                 dfs.append(df)
+                ws.append(v)
 
-            return dfs
+            return dfs, ws
 
     def set_wells(self, wells):
         self.wells = wells
 
     def test_sheets_values(self):
-        data = self.get_sheet_values()
+        data, wells = self.get_sheet_values()
         #print(data[0].head())
         #print(data[0].dtypes)
-        self.generate(data)
+        self.generate(data, wells)
 
 """
  Graphing menu window
