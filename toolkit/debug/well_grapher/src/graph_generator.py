@@ -40,3 +40,17 @@ def get_last_row(sheet, well):
 """
 def create_dfs_from_sheet():
     pass
+
+# Google functions
+"""
+ setup_google_creds
+
+ @desc: Create credentials and set up permissions
+ @return: creds (google object idk)
+"""
+def setup_google_creds(scopes):
+    pass
+
+"""
+ 
+"""
