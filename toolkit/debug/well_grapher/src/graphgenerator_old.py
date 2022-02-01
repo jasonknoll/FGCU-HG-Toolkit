@@ -121,7 +121,7 @@ class GoogleHandler:
  allow for easier working with matplotlib.
 """
 class GraphGenerator:
-    def __init__(self):
+    def __init__(self, wells=[]):
         """
          Init google api service
          This allows the graph generator object to 
@@ -131,7 +131,7 @@ class GraphGenerator:
 
         self.sheet = None
 
-        self.wells = []
+        self.wells = wells
 
         self.all_wells = {}
     
@@ -203,14 +203,15 @@ class GraphGenerator:
         #print(data[0].dtypes)
         self.generate(data, wells)
 
+    def create_df_from_sheet(sheet_name):
+        pass
+
 """
  Graphing menu window
 """
 class GraphMenu(Screen):
     def __init__(self, *args, **kwargs):
         super(GraphMenu, self).__init__(*args, **kwargs)
-
-        self.gen = GraphGenerator()
 
         """
          A fully-functioning product should grab these automatically.
@@ -229,9 +230,11 @@ class GraphMenu(Screen):
 
         self.gen.all_wells = self.all_wells
 
-        self.ids.sevenA.bind(active=self.test_check_box)
+        self.ids.sevenA.bind(active=self.select_well)
 
-        self.wells_to_graph = []
+        self.selected_wells = []
+
+        self.gen = GraphGenerator(wells=selected_wells)
 
         # instead of using kv language
         # we need to track every button
@@ -239,18 +242,11 @@ class GraphMenu(Screen):
     """
      These functions add and remove the wells to graph based on the checkboxes
     """
-    def add_well_to_graphing(self, well):
-        self.wells.append(well)
-
-    def rm_well_from_graphing(self, well):
-        self.wells.remove(well)
-
-    def test_check_box(self, cb, value):
-        if value:
-            print("checkbox checked")
-            print(f"{cb.text}")
+    def select_well(self, cb, value):
+        if value and value not in selv.selected_wells:
+            self.selected_wells.append(value)
         else:
-            print("unchecked")
+            self.selected_wells.remove(value)
 
     def add_checkbox_well(self, cb, value):
         pass
@@ -263,7 +259,7 @@ class GraphMenu(Screen):
      Acts as a wrapper to send data to generator
     """
     def send_wells_to_gen(self):
-        self.gen.set_wells(self.wells_to_graph)
+        self.gen.set_wells(self.selected_wells)
 
 
 """
