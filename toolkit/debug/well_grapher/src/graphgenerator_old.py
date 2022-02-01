@@ -1,7 +1,7 @@
 """
  FGCU Hydrogeology Well Data Graph Generator
  Author: Jason knoll
- version: 0.1.12
+ version: 0.1.13
 """
 
 """
@@ -202,6 +202,8 @@ class GraphGenerator:
         #print(data[0].head())
         #print(data[0].dtypes)
         self.generate(data, wells)
+
+    def graph_sheets(self):
 
     def create_df_from_sheet(sheet_name):
         pass
