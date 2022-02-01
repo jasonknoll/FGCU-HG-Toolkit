@@ -4,24 +4,6 @@
  version: 0.1.15
 """
 
-"""
- TODO List
- In here, I need to:
- + Refactor well data entry folder
- + Create a main menu window 
-    - Add google login status
-    - Add login button
-    - Add Graphing button (opens new 'Graphing' window)
-
- + Create graphing menu window
-    - Select sheets (checkbox)
-    - Select colors (rgb?)
-
- + Generate graph with selected settings
-
- + Figure out how to package
-"""
-
 import time
 
 import os.path
