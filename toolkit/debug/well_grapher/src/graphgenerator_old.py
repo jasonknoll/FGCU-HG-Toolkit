@@ -233,6 +233,9 @@ class GraphMenu(Screen):
 
         self.wells_to_graph = []
 
+        # instead of using kv language
+        # we need to track every button
+
     """
      These functions add and remove the wells to graph based on the checkboxes
     """
@@ -245,6 +248,7 @@ class GraphMenu(Screen):
     def test_check_box(self, cb, value):
         if value:
             print("checkbox checked")
+            print(f"{cb.text}")
         else:
             print("unchecked")
 
