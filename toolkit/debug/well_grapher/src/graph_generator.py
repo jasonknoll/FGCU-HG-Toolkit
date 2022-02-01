@@ -1,5 +1,5 @@
 """
- FGCU Hydrogeology graph generator 
+ FGCU Hydrogeology graph generator API
  Author: Jason Knoll
 """
 

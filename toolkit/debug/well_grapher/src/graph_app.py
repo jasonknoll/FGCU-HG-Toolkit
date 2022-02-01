@@ -1,5 +1,5 @@
 """
- FGCU Hydrogeology well data grapher app interface
+ FGCU Hydrogeology well data grapher app GUI
  Author: Jason Knoll
 """
 
