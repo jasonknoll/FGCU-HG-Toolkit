@@ -37,66 +37,77 @@
 
                 CheckBox:
                     id: twentyTwoM
+                    text: root.ids.twentyTwoM_label.text
                 Label:
                     id: twentyTwoM_label
                     text: "22M"
 
                 CheckBox:
                     id: threeA
+                    text: root.ids.threeA_label.text
                 Label:
                     id: threeA_label
                     text: "3A"
 
                 CheckBox:
                     id: MM
+                    text: root.ids.MM_label.text
                 Label:
                     id: MM_label
                     text: "MM"
 
                 CheckBox:
                     id: fiveM
+                    text: root.ids.fiveM_label.text
                 Label:
                     id: fiveM_label
                     text: "5M"
 
                 CheckBox:
                     id: thirtyThreeM
+                    text: root.ids.thirtyThreeM_label.text
                 Label:
                     id: thirtyThreeM_label
                     text: "33M"
                 
                 CheckBox:
                     id: U1
+                    text: root.ids.u1_label.text
                 Label:
                     id: u1_label
                     text: "U1"
 
                 CheckBox:
                     id: twentySevenM
+                    text: root.ids.twentySevenM_label.text
                 Label:
                     id: twentySevenM_label
                     text: "27M"
 
                 CheckBox:
                     id: sixA
+                    text: root.ids.sixA_label.text
                 Label:
                     id: sixA_label
                     text: "6A"
 
                 CheckBox:
                     id: twentyEightM
+                    text: root.ids.twentyEightM_label.text
                 Label:
                     id: twentyEightM_label
                     text: "28A"
 
                 CheckBox:
                     id: twentyNineM
+                    text: root.ids.twentyNineM_label.text
                 Label:
                     id: twentyNineM_label
                     text: "29M"
 
                 CheckBox:
                     id: elevenM
+                    text: root.ids.elevenM_label.text
                 Label:
                     id: elevenM_label
                     text: "11M"   
@@ -177,4 +188,4 @@
                 cols: 1
                 Button: 
                     text: "Generate graph"
-                    on_press: root.gen.test_sheets_values()
+                    on_press: root.send_wells_to_gen()

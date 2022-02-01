@@ -170,28 +170,22 @@ class GraphGenerator:
         dfs = []
         ws = []
 
+        print(self.wells)
+
         if self.wells:
             for w in self.wells:
-                pass
+                
+                dfs.append(self.create_df_from_sheet(w))
+                ws.append(w)
+
         else:
             # do every well
             for k,v in self.all_wells.items():
-                rows = self.sheet.values().get(
-                                        spreadsheetId=sheet_id,
-                                        range=f"{v}!A2:E{self.get_last_row(v)}").execute()
-
-                data = rows.get('values')
-
-                df = pd.DataFrame(data[1:], columns=data[0])
-                df.drop(df.index[df['Elevation (ft)'] == "#VALUE!"], inplace=True)
-                df['Date'] = pd.to_datetime(df['Date'], format='%m/%d/%Y')
-                df['Elevation (ft)'] = df['Elevation (ft)'].astype(float)
-
-                print(f"Created df {v}")
-                dfs.append(df)
+                
+                dfs.append(self.create_df_from_sheet(v))
                 ws.append(v)
 
-            return dfs, ws
+        return dfs, ws
 
     def set_wells(self, wells):
         self.wells = wells
@@ -203,10 +197,22 @@ class GraphGenerator:
         #print(data[0].dtypes)
         self.generate(data, wells)
 
-    def graph_sheets(self):
+    def create_df_from_sheet(self, sheet_name):
+        rows = self.sheet.values().get(
+            spreadsheetId=sheet_id,
+            range=f"{sheet_name}!A2:E{self.get_last_row(sheet_name)}"
+        ).execute()
 
-    def create_df_from_sheet(sheet_name):
-        pass
+        data = rows.get('values')
+
+        df = pd.DataFrame(data[1:], columns=data[0])
+        df.drop(df.index[df['Elevation (ft)'] == "#VALUE!"], inplace=True)
+        df['Date'] = pd.to_datetime(df['Date'], format='%m/%d/%Y')
+        df['Elevation (ft)'] = df['Elevation (ft)'].astype(float)
+
+        print(f"df create for {sheet_name}")
+
+        return df
 
 """
  Graphing menu window
@@ -214,6 +220,9 @@ class GraphGenerator:
 class GraphMenu(Screen):
     def __init__(self, *args, **kwargs):
         super(GraphMenu, self).__init__(*args, **kwargs)
+
+
+        self.gen = GraphGenerator()
 
         """
          A fully-functioning product should grab these automatically.
@@ -232,11 +241,12 @@ class GraphMenu(Screen):
 
         self.gen.all_wells = self.all_wells
 
-        self.ids.sevenA.bind(active=self.select_well)
+        #self.ids['sevenA'].bind(active=self.select_well)
 
         self.selected_wells = []
 
-        self.gen = GraphGenerator(wells=selected_wells)
+        for k,v in self.all_wells.items():
+            self.ids[f'{k}'].bind(active=self.select_well)
 
         # instead of using kv language
         # we need to track every button
@@ -245,10 +255,11 @@ class GraphMenu(Screen):
      These functions add and remove the wells to graph based on the checkboxes
     """
     def select_well(self, cb, value):
-        if value and value not in selv.selected_wells:
-            self.selected_wells.append(value)
+        if value and cb.text not in self.selected_wells:
+            print(f"{cb.text} selected")
+            self.selected_wells.append(cb.text)
         else:
-            self.selected_wells.remove(value)
+            self.selected_wells.remove(cb.text)
 
     def add_checkbox_well(self, cb, value):
         pass
@@ -261,7 +272,11 @@ class GraphMenu(Screen):
      Acts as a wrapper to send data to generator
     """
     def send_wells_to_gen(self):
-        self.gen.set_wells(self.selected_wells)
+
+
+        self.gen.set_wells(self.selected_wells) 
+
+        self.gen.test_sheets_values()
 
 
 """
