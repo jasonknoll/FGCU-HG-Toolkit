@@ -25,6 +25,8 @@ from kivy.config import Config
 
 from kivy.core.window import Window
 
+from kivy.properties import ObjectProperty
+
 # Google api imports 
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -242,6 +244,20 @@ class GraphMenu(Screen):
             self.selected_wells.append(cb.text)
         else:
             self.selected_wells.remove(cb.text)
+    """
+    def select_all_wells(self, cb, value):
+        t = ObjectProperty(True)
+        f = ObjectProperty(False)
+
+        if (len(self.selected_wells) < 22 and value):
+            self.selected_wells = []
+
+            for k,v in self.all_wells.items():
+                self.ids[f'{k}'].bind(active=t)
+                self.selected_wells.append(v)
+        else:
+            self.selected_wells = []
+    """
 
     def add_checkbox_well(self, cb, value):
         pass
