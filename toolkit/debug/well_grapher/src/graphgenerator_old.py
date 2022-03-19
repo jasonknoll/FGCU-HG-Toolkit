@@ -377,7 +377,7 @@ class GraphApp(App):
 
         sm.add_widget(MainMenu(sm, name='main'))
         sm.add_widget(GraphMenu(name='graph'))
-        Window.size = (480, 480)
+        Window.size = (480, 520)
         self.title = 'FGCU Hydrogeology Graph Generator'
         return sm
 
