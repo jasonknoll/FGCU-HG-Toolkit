@@ -127,9 +127,9 @@ class GraphGenerator:
         for d in dfs[1:]:
             d.plot(kind='line',x="Date", y="Elevation (ft)", ax=ax)
 
-        ax.set_ylabel('Elevation (ft)')
+        ax.set_ylabel('Elevation A.M.S.L (ft)')
         
-        ax.set_title('FGCU Hydrogeology Well Elevation')
+        ax.set_title('FGCU Hydrogeology Well Elevation A.M.S.L')
 
         ax.legend(wells)
 
