@@ -56,8 +56,13 @@ def delete_creds():
 
 def check_creds_valid() -> bool:
     '''       
+     If the credential token has not been created in the current
+     calender day, delete it and make the user login. 
     '''
-    pass
+    
+    token_creation_time = os.path.getctime('../../well_grapher/creds/token.json')
+
+    
 
 
 class GraphGenerator(App):
