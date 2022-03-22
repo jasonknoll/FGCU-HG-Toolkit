@@ -29,7 +29,18 @@ class GraphMenu(Screen):
     pass
 
 class LoginMenu(Screen): 
+    '''
+     This contains the login menu, which consists of only one widget:
+     a button that will call google's login snippet. 
+
+     This screen should be skipped if credentials are valid
+    '''
     pass
+
+class GraphGenerator(App):
+    sm = ScreenManager() 
+
+    #sm.add_widget()
 
 if __name__ == '__main__':
     pass
