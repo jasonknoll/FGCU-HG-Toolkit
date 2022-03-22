@@ -5,6 +5,8 @@
 import os
 import platform
 
+from datetime import datetime
+
 import kivy
 
 from kivy.app import App
@@ -42,7 +44,8 @@ class LoginMenu(Screen):
 
      This screen should be skipped if credentials are valid
     '''
-    def __init__(self, *args, **kwargs): 
+
+    def __init__(self, *args, **kwargs):
         # init Screen super class
         super(LoginMenu, self).__init__(*args, **kwargs)
 
@@ -51,18 +54,27 @@ class LoginMenu(Screen):
  TODO need to check if the creds are valid. If not,
  delete them and set a `logged_in` variable to false
 """
+
+
 def delete_creds():
     pass
+
 
 def check_creds_valid() -> bool:
     '''       
      If the credential token has not been created in the current
      calender day, delete it and make the user login. 
-    '''
-    
-    token_creation_time = os.path.getctime('../../well_grapher/creds/token.json')
 
-    
+     :return bool:
+    '''
+
+    token_timestamp = datetime.fromtimestamp(
+        os.path.getctime('../../well_grapher/creds/token.json')
+    ).strftime('%Y-%m-%d')
+
+    today = datetime.now().strftime('%Y-%m-%d')
+
+    return token_timestamp >= today
 
 
 class GraphGenerator(App):
