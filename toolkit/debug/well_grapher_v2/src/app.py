@@ -56,24 +56,29 @@ class LoginMenu(Screen):
 """
 
 
-def delete_creds():
+def delete_creds(tok_path):
     pass
 
 
-def check_creds_valid() -> bool:
+def check_creds_valid(tok_path) -> bool:
     '''       
      If the credential token has not been created in the current
      calender day, delete it and make the user login. 
 
-     :return bool:
+     :param tok_path: Path to the token.json file    
+
+     :return: cred_is_valid
+     :rtype: bool
     '''
 
+    # grab times in the datetime format
     token_timestamp = datetime.fromtimestamp(
-        os.path.getctime('../../well_grapher/creds/token.json')
+        os.path.getctime(tok_path)
     ).strftime('%Y-%m-%d')
 
     today = datetime.now().strftime('%Y-%m-%d')
 
+    # returns true if the token was created the day of usage
     return token_timestamp >= today
 
 
@@ -82,6 +87,9 @@ class GraphGenerator(App):
      Kivy object which contains our app widgets
     '''
     sm = ScreenManager()
+
+    # may set this up somewhere else
+    token_path = '../../well_grapher/creds/token.json'
 
     # sm.add_widget()
 
