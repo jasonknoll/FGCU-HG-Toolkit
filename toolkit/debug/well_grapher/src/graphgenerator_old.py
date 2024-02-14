@@ -47,7 +47,7 @@ red_text_color = 'ff0000'
 green_text_color = '00ff00'
 
 g_scopes = ['https://www.googleapis.com/auth/spreadsheets.readonly']
-sheet_id = '1u8uMAEu6FZPHEoKERau1R_emPtARuAPBbDWfZZvY6Ao'
+sheet_id = ''
 
 
 """
