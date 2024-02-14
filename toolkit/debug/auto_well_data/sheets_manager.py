@@ -21,8 +21,8 @@ from dateutil import parser
 class GoogleManager:
     def __init__(self):
         self.scopes = ['https://www.googleapis.com/auth/spreadsheets']
-        self.old_sheet_id = '1RCAEGJuKwnAstDoXLw9eoRIZoJZMe2ZKNsTFyehBaVo'
-        self.test_sheet_id = '1u8uMAEu6FZPHEoKERau1R_emPtARuAPBbDWfZZvY6Ao'
+        self.old_sheet_id = ''
+        self.test_sheet_id = ''
         
 
         """
